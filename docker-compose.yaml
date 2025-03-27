@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    container_name: hackathon-database
+    restart: always
+    environment:
+      POSTGRES_DB: hackathon
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  pg-data:
