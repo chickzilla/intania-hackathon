@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"hackathon/internal/models"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -29,7 +28,7 @@ func ConnectDatabase() {
 
 	DB = db
 
-	if err := models.AutoMigrateAll(DB); err != nil {
+	if err := AutoMigrateAll(DB); err != nil {
 		panic(err.Error())
 	}
 

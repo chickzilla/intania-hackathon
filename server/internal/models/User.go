@@ -1,6 +1,8 @@
 package models
 
 import (
+	"hackathon/internal/utils"
+
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
@@ -10,12 +12,13 @@ type User struct {
 	Username string    `gorm:"not null"`
 	Password string    `gorm:"not null"`
 	Email    string    `gorm:"not null"`
+	Tel      string    `gorm:""`
 }
 
-func migrateUser(db *gorm.DB) error {
+func MigrateUser(db *gorm.DB) error {
 	return db.AutoMigrate(&User{})
 }
 
 func init() {
-	RegisterMigrations(migrateUser)
+	utils.RegisterMigrations(MigrateUser)
 }
