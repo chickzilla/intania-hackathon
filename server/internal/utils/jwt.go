@@ -6,11 +6,9 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/joho/godotenv"
 )
 
 func GenerateKey(email string) (string, error) {
-	godotenv.Load()
 
 	key := os.Getenv("SECRET_KEY")
 	if key == "" {
@@ -34,7 +32,6 @@ func GenerateKey(email string) (string, error) {
 // Validate and return email
 
 func ValidateJWTToken(tokenString string) string {
-	godotenv.Load()
 
 	key := os.Getenv("SECRET_KEY")
 	if key == "" {
