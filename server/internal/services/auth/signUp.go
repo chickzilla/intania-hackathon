@@ -1,8 +1,7 @@
-package services
+package auth
 
 import (
 	"hackathon/internal/models"
-	"hackathon/internal/repositories"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,9 +13,7 @@ type SignUpRequest struct {
 	Password string `json:"password"`
 }
 
-var UserRepo repositories.UserRepo
-
-func SignUp(c *gin.Context) {
+func (r *Resolver) SignUp(c *gin.Context) {
 
 	var req SignUpRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -24,7 +21,7 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
-	if _, err := UserRepo.FindByUsername(c, req.Email); err == nil {
+	if _, err := r.UserRepo.FindByEmail(c, req.Email); err == nil {
 		c.JSON(400, gin.H{"error": "Email already exists!"})
 		return
 	}
@@ -36,10 +33,10 @@ func SignUp(c *gin.Context) {
 	}
 
 	newUser := models.User{
-		Username: req.Email,
+		Email:    req.Email,
 		Password: string(hashed),
 	}
-	if err := UserRepo.AddOne(c, &newUser); err != nil {
+	if err := r.UserRepo.AddOne(c, &newUser); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})
 		return
 	}
