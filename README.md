@@ -1,11 +1,5 @@
 # Intania Hackathon LadyBoySoi2
 
-## MySQL
-
-```bash
-docker-compose up -d
-```
-
 ## Next.Js
 
 Tailwind
@@ -28,3 +22,11 @@ cd server
 
 go run main.go
 ```
+
+## MySQL
+
+```bash
+docker-compose up -d
+```
+
+## S3
