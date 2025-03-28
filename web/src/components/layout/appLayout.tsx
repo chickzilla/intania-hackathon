@@ -7,6 +7,7 @@ import {
   Anchor,
   Avatar,
   ActionIcon,
+  useComputedColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ThemeToggle from "../ui/actionIcons/themeToggle";
@@ -14,7 +15,7 @@ import { IconBell } from "@tabler/icons-react";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
-
+  const darkMode = useComputedColorScheme() === "dark";
   return (
     <>
       <AppShell
@@ -37,14 +38,14 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             <Title>Scuola</Title>
             <Group align="center">
               <Group visibleFrom="sm">
-                <Anchor c="black">Dashboard</Anchor>
-                <Anchor c="black">Profile</Anchor>
-                <Anchor c="black">Courses</Anchor>
-                <Anchor c="black">Competitions</Anchor>
+                <Anchor c={darkMode ? "gray" : "black"}>Dashboard</Anchor>
+                <Anchor c={darkMode ? "gray" : "black"}>Profile</Anchor>
+                <Anchor c={darkMode ? "gray" : "black"}>Courses</Anchor>
+                <Anchor c={darkMode ? "gray" : "black"}>Competitions</Anchor>
               </Group>
             </Group>
             <Group>
-              <ActionIcon color="black" variant="transparent">
+              <ActionIcon variant="default">
                 <IconBell
                   style={{ width: "70%", height: "70%" }}
                   stroke={1.5}

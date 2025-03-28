@@ -1,17 +1,26 @@
-import { ActionIcon, useMantineColorScheme } from "@mantine/core";
-import { IconSun } from "@tabler/icons-react";
+import {
+  ActionIcon,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from "@mantine/core";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 
 const ThemeToggle = () => {
   const { setColorScheme } = useMantineColorScheme();
-
+  const computedColorScheme = useComputedColorScheme();
+  const darkMode = computedColorScheme !== "light";
   return (
     <ActionIcon
-      onClick={() => setColorScheme("light")}
+      onClick={() =>
+        setColorScheme(computedColorScheme === "dark" ? "light" : "dark")
+      }
       variant="default"
-      radius="xl"
-      size="lg"
     >
-      <IconSun style={{ width: "50%", height: "50%" }} stroke={1.5} />
+      {darkMode ? (
+        <IconMoon style={{ width: "70%", height: "70%" }} stroke={1.5} />
+      ) : (
+        <IconSun style={{ width: "70%", height: "70%" }} stroke={1.5} />
+      )}
     </ActionIcon>
   );
 };
