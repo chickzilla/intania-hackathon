@@ -13,6 +13,7 @@ type Handler struct {
 	Auth    *auth.Resolver
 	User    *user.Resolver
 	Contest *contest.Resolver
+	Course  *course.Resolver
 }
 
 func NewHandler(db *gorm.DB) *Handler {
