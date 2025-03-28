@@ -28,6 +28,9 @@ func ConfigRouters(server *gin.Engine) {
 		middleware.RequireRoles("LECTURER", "ADMIN"),
 		handler.Course.Create)
 
+	courseGroup.POST("/join",
+		middleware.AuthMiddleware(),
+		handler.Course.JoinCourse)
 	// user
 	server.POST("/add-user", handler.User.AddUser)
 	server.GET("/find-all-user", handler.User.FindAllUser)

@@ -36,5 +36,14 @@ func (r *Resolver) Create(c *gin.Context) {
 		return
 	}
 
+	newUserCouse := models.UserCourses{
+		UserID:   idParsed,
+		CourseID: newCourse.ID,
+	}
+	if err := r.UserCourseRepo.AddOne(c, &newUserCouse); err != nil {
+		c.JSON(500, gin.H{"error": "could not create user course"})
+		return
+	}
+
 	c.JSON(200, newCourse)
 }

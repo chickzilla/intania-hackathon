@@ -7,11 +7,13 @@ import (
 )
 
 type Resolver struct {
-	CourseRepo *repositories.CourseRepo
+	CourseRepo     *repositories.CourseRepo
+	UserCourseRepo *repositories.UserCourseRepo
 }
 
 func NewResolver(db *gorm.DB) *Resolver {
 	return &Resolver{
-		CourseRepo: repositories.NewCourseRepo(db),
+		CourseRepo:     repositories.NewCourseRepo(db),
+		UserCourseRepo: repositories.NewUserCourseRepo(db),
 	}
 }
