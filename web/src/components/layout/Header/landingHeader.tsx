@@ -1,9 +1,12 @@
+"use client";
 import ThemeToggle from "@/components/ui/actionIcons/themeToggle";
 import { Group, Center, Button, Text } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import { IconDeviceGamepad2 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 const LandingHeader = () => {
+  const router = useRouter();
   const section1 = useScrollIntoView<HTMLDivElement>({ duration: 500 });
   const section2 = useScrollIntoView<HTMLDivElement>({ duration: 500 });
   const section3 = useScrollIntoView<HTMLDivElement>({ duration: 500 });
@@ -44,10 +47,25 @@ const LandingHeader = () => {
           Testimonials
         </Text>
         <ThemeToggle />
-        <Button variant="default" radius="md" visibleFrom="xs">
+        <Button
+          variant="default"
+          radius="md"
+          visibleFrom="xs"
+          onClick={() => {
+            router.push("/login");
+          }}
+        >
           Log in
         </Button>
-        <Button variant="filled" color="red.8" radius="md" visibleFrom="xs">
+        <Button
+          variant="filled"
+          color="red.8"
+          radius="md"
+          visibleFrom="xs"
+          onClick={() => {
+            router.push("/register");
+          }}
+        >
           Get Started
         </Button>
       </Group>

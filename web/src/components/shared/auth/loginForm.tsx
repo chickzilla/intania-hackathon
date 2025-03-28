@@ -1,6 +1,7 @@
 "use client";
 import useLoginForm from "@/forms/useLoginForm";
 import {
+  Anchor,
   Button,
   Center,
   Divider,
@@ -11,9 +12,11 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
+
 import { IconBrandGithub, IconBrandGoogleFilled } from "@tabler/icons-react";
 const LoginForm = () => {
   const form = useLoginForm();
+
   return (
     <form onSubmit={form.onSubmit((values) => {})}>
       <Stack>
@@ -37,7 +40,7 @@ const LoginForm = () => {
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
-        <Button color="black" type="submit">
+        <Button color="red.8" type="submit">
           <Text>Login</Text>
         </Button>
         <Divider my="xs" label="Or continue with" labelPosition="center" />
@@ -49,6 +52,16 @@ const LoginForm = () => {
             <IconBrandGoogleFilled size={20} />
           </Button>
         </Group>
+        <Center>
+          <Group gap="xs">
+            <Text size="sm" c="gray">
+              Don't have an account?
+            </Text>
+            <Anchor size="sm" href="/register">
+              Sign Up
+            </Anchor>
+          </Group>
+        </Center>
       </Stack>
     </form>
   );
