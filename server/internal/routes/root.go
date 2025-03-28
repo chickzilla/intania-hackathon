@@ -46,7 +46,14 @@ func ConfigRouters(server *gin.Engine) {
 		handler.Module.FindAllInCourse)
 
 	// user
-	server.POST("/add-user", handler.User.AddUser)
+	server.POST("/add-user", handler.User.AddUser) // register?
 	server.GET("/find-all-user", handler.User.FindAllUser)
+
+	//contest
+	contestGroup := server.Group("/contest")
+	contestGroup.Use(middleware.AuthMiddleware())
+	contestGroup.POST("/create",
+		middleware.RequireRoles("LECTURER"),
+		handler.Contest.AddContest)
 
 }
