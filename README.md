@@ -3,12 +3,13 @@
 ## Next.Js
 
 Tailwind
+
 ```bash
 cd web
 
-pnpm i
+yarn i
 
-pnpm dev
+yarn dev
 ```
 
 \
@@ -17,6 +18,7 @@ pnpm dev
 
 Gorm ( auto migration )
 Gin
+
 ```bash
 cd server
 
