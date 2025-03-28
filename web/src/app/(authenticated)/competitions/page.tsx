@@ -8,12 +8,16 @@ export default function CompetitionsPage() {
     const searchHandler = (e: string) => {
         console.log(e);
     };
+    const searchByTabHandler = (tab: string) => {
+        console.log(tab);
+    };
     return (
         <Header
             title={CompetitionsHeader.title}
             description={CompetitionsHeader.description}
             tabs={CompetitionsHeader.tabs}
             onSearch={searchHandler}
+            onSearchByTab={searchByTabHandler}
         ></Header>
     );
 }

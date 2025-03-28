@@ -25,6 +25,7 @@ export default function Header({
     title,
     description,
     onSearch,
+    onSearchByTab,
     tabs,
 }: HeaderProps) {
     const computedColorScheme = useComputedColorScheme();
@@ -32,6 +33,7 @@ export default function Header({
 
     const [value, setValue] = useState<string>("");
     const activeTab = tabs ? tabs[0].toLowerCase() : "";
+    // TODO: Correct Handlers
     const handleSearch = () => {
         if (value.trim()) {
             onSearch(value.trim());
@@ -104,6 +106,7 @@ export default function Header({
                                     borderRadius: "10px",
                                     textAlign: "center",
                                 }}
+                                onClick={() => onSearchByTab(tab.toLowerCase())}
                             >
                                 {tab}
                             </Tabs.Tab>
