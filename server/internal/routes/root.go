@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"hackathon/internal/middleware"
-	"hackathon/internal/models"
 	"hackathon/internal/services"
 	"hackathon/internal/services/s3"
 	"hackathon/internal/utils"
@@ -21,7 +19,7 @@ func ConfigRouters(server *gin.Engine) {
 	server.POST("/upload", s3.Upload)
 
 	// course
-	server.POST("/course", middleware.AuthMiddleware(), middleware.RequireRoles(models.LecturerRole, models.AdminRole), handler.Course.Create)
+	// server.POST("/course", middleware.AuthMiddleware(), middleware.RequireRoles(models.LecturerRole, models.AdminRole), handler.Course.Create)
 
 	// user
 	server.POST("/add-user", handler.User.AddUser)
