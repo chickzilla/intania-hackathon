@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   TextInput,
+  Title,
 } from "@mantine/core";
 import { IconBrandGithub, IconBrandGoogleFilled } from "@tabler/icons-react";
 const LoginForm = () => {
@@ -18,12 +19,10 @@ const LoginForm = () => {
       <Stack>
         <Stack gap="0">
           <Center>
-            <Text size="xl" fw={900}>
-              Welcome back
-            </Text>
+            <Title>Scuola</Title>
           </Center>
           <Center>
-            <Text c="gray">Login to Scuola account</Text>
+            <Text c="gray">The ultimate educational gaming platform</Text>
           </Center>
         </Stack>
         <TextInput

@@ -5,7 +5,8 @@ import {
   MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
-import AppLayout from "@/components/layout/appLayout";
+import LandingLayout from "@/components/layout/AppShell/landingLayout";
+import { theme } from "@/theme";
 
 export const metadata = {
   title: "Scuola",
@@ -22,8 +23,8 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>
-          <AppLayout>{children}</AppLayout>
+        <MantineProvider theme={theme}>
+          <LandingLayout>{children}</LandingLayout>
         </MantineProvider>
       </body>
     </html>
