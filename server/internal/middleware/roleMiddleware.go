@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RequireRole(role string) gin.HandlerFunc {
+func RequireRoles(allowedRoles ...string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		rawRole, exists := c.Get("role")
 		if !exists {
@@ -22,14 +22,14 @@ func RequireRole(role string) gin.HandlerFunc {
 			return
 		}
 
-		println("role in context:", roleFromContext)
-
-		if roleFromContext != role {
-			c.JSON(http.StatusForbidden, gin.H{"message": "You don't have permission to access this resource"})
-			c.Abort()
-			return
+		for _, allowed := range allowedRoles {
+			if roleFromContext == allowed {
+				c.Next()
+				return
+			}
 		}
 
-		c.Next()
+		c.JSON(http.StatusForbidden, gin.H{"message": "You don't have permission to access this resource"})
+		c.Abort()
 	}
 }

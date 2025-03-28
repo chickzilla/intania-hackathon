@@ -20,17 +20,7 @@ func ConfigRouters(server *gin.Engine) {
 	//upload
 	server.POST("/upload", s3.Upload)
 
-	//test middleware
-	server.GET("/test", middleware.AuthMiddleware(), func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Test auth middleware",
-		})
-	})
-
-	server.GET("/test/admin", middleware.AuthMiddleware(), middleware.RequireRole(models.AdminRole), func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Test auth role admin",
-		})
-	})
+	// course
+	server.POST("/course", middleware.AuthMiddleware(), middleware.RequireRoles(models.LecturerRole, models.AdminRole), handler.Course.Create)
 
 }
