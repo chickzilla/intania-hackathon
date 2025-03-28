@@ -1,9 +1,13 @@
 package auth
 
 import (
-	"hackathon/internal/utils"
+	"errors"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -30,11 +34,33 @@ func (r *Resolver) SignIn(c *gin.Context) {
 		return
 	}
 
-	token, err := utils.GenerateKey(user.Email)
+	token, err := GenerateKey(user.ID, user.UserRole)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(200, gin.H{"message": token})
+}
+
+func GenerateKey(id uuid.UUID, userRole string) (string, error) {
+
+	key := os.Getenv("SECRET_KEY")
+	if key == "" {
+		return "", errors.New("SECRET_KEY not found")
+	}
+
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"id":   id,
+		"role": userRole,
+		"exp":  time.Now().Add(time.Hour * 72).Unix(),
+	})
+
+	tokenSting, err := claims.SignedString([]byte(key))
+
+	if err != nil {
+		return "", err
+	}
+
+	return tokenSting, nil
 }

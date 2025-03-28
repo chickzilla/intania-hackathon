@@ -10,6 +10,7 @@ import (
 
 type SignUpRequest struct {
 	Email    string `json:"email"`
+	Role     string `json:"role"`
 	Password string `json:"password"`
 }
 
@@ -34,6 +35,7 @@ func (r *Resolver) SignUp(c *gin.Context) {
 
 	newUser := models.User{
 		Email:    req.Email,
+		UserRole: req.Role,
 		Password: string(hashed),
 	}
 	if err := r.UserRepo.AddOne(c, &newUser); err != nil {
