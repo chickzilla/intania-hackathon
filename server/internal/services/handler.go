@@ -2,6 +2,7 @@ package services
 
 import (
 	"hackathon/internal/services/auth"
+	"hackathon/internal/services/contest"
 	"hackathon/internal/services/course"
 	"hackathon/internal/services/user"
 
@@ -9,15 +10,17 @@ import (
 )
 
 type Handler struct {
-	Auth   *auth.Resolver
-	User   *user.Resolver
-	Course *course.Resolver
+	Auth    *auth.Resolver
+	User    *user.Resolver
+	Contest *contest.Resolver
+	Course  *course.Resolver
 }
 
 func NewHandler(db *gorm.DB) *Handler {
 	return &Handler{
-		User:   user.NewResolver(db),
-		Auth:   auth.NewResolver(db),
-		Course: course.NewResolver(db),
+		Auth:    auth.NewResolver(db),
+		User:    user.NewResolver(db),
+		Contest: contest.NewResolver(db),
+		Course:  course.NewResolver(db),
 	}
 }
