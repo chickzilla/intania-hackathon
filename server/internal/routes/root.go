@@ -33,4 +33,8 @@ func ConfigRouters(server *gin.Engine) {
 		})
 	})
 
+	// user
+	server.POST("/add-user", handler.User.AddUser)
+	server.GET("/find-all-user", handler.User.FindAllUser)
+
 }
