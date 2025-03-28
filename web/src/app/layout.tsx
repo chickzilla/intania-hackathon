@@ -5,7 +5,6 @@ import {
   MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
-import AppLayout from "@/components/layout/appLayout";
 
 export const metadata = {
   title: "Scuola",
