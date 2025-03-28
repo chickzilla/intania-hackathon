@@ -1,18 +1,6 @@
 "use client";
-import {
-  AppShell,
-  Group,
-  useComputedColorScheme,
-  Box,
-  Button,
-  Flex,
-  Center,
-  Title,
-} from "@mantine/core";
-import { useScrollIntoView } from "@mantine/hooks";
-import { IconDeviceGamepad2 } from "@tabler/icons-react";
-import ThemeToggle from "../../ui/actionIcons/themeToggle";
-import { Text } from "@mantine/core";
+import { AppShell, useComputedColorScheme, Box } from "@mantine/core";
+
 import LandingHeader from "../Header/landingHeader";
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {

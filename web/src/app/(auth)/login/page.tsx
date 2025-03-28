@@ -3,11 +3,9 @@ import { Paper } from "@mantine/core";
 
 const LoginPage = () => {
   return (
-    <>
-      <Paper radius="md" shadow="lg" p="lg" w={400}>
-        <LoginForm />
-      </Paper>
-    </>
+    <Paper radius="md" shadow="lg" p="lg" w={400}>
+      <LoginForm />
+    </Paper>
   );
 };
 
