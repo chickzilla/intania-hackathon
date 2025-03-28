@@ -8,6 +8,7 @@ import {
   Avatar,
   ActionIcon,
   useComputedColorScheme,
+  Box,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ThemeToggle from "../ui/actionIcons/themeToggle";
@@ -17,7 +18,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
   const darkMode = useComputedColorScheme() === "dark";
   return (
-    <>
+    <Box bg={darkMode ? "dark.6" : "gray.0"}>
       <AppShell
         header={{ height: 60 }}
         navbar={{
@@ -63,7 +64,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
         <AppShell.Main>{children}</AppShell.Main>
       </AppShell>
-    </>
+    </Box>
   );
 };
 
