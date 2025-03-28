@@ -4,6 +4,7 @@ import (
 	"hackathon/internal/services/auth"
 	"hackathon/internal/services/contest"
 	"hackathon/internal/services/course"
+	"hackathon/internal/services/module"
 	"hackathon/internal/services/user"
 
 	"gorm.io/gorm"
@@ -14,6 +15,7 @@ type Handler struct {
 	User    *user.Resolver
 	Contest *contest.Resolver
 	Course  *course.Resolver
+	Module *module.Resolver
 }
 
 func NewHandler(db *gorm.DB) *Handler {
@@ -22,5 +24,6 @@ func NewHandler(db *gorm.DB) *Handler {
 		User:    user.NewResolver(db),
 		Contest: contest.NewResolver(db),
 		Course:  course.NewResolver(db),
+		Module: module.NewResolver(db),
 	}
 }

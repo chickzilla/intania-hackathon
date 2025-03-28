@@ -11,7 +11,7 @@ import (
 type Courses struct {
 	ID         uuid.UUID `gorm:"column:id;type:uuid;primary_key;default:gen_random_uuid()"`
 	Name       string    `gorm:"not null"`
-	Detail     string
+	Detail     string    `gorm:""`
 	Created_at time.Time `gorm:"type:timestamp;default:now()"`
 	Created_by uuid.UUID
 	LecturerID uuid.UUID `gorm:"column:lecturer_id;type:uuid;not null"`
