@@ -59,6 +59,11 @@ export default function Header({
                     miw="300px"
                     size="md"
                     radius="md"
+                    styles={{
+                        input: {
+                            borderWidth: 2,
+                        },
+                    }}
                     onKeyDown={(event) => {
                         if (event.key === "Enter") handleSearch();
                     }}
