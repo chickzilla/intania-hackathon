@@ -29,10 +29,11 @@ export default function Home() {
     <main>
       <section>
         <Grid>
-          <GridCol h="80vh" span={{ base: 12, md: 6 }}>
+          <GridCol h="95vh" span={{ base: 12, md: 6 }}>
             <Stack h="100%" align="stretch" justify="center" gap="md">
               <Group gap={0}>
-                <Title size={60}>Learn,Compete,</Title>
+                <Title size={60}>Learn,</Title>
+                <Title size={60}>Compete,</Title>
                 <Title size={60} c="red.8">
                   Level Up
                 </Title>
@@ -86,14 +87,14 @@ export default function Home() {
             <Title>Platform Features</Title>
           </Center>
           <Center>
-            <Text c="gray">
+            <Text c="gray" mb="xl">
               Scuola combines education with gamification to create an engaging
               learning experience
             </Text>
           </Center>
           <Grid grow gutter="xl">
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"
@@ -113,7 +114,7 @@ export default function Home() {
               </Paper>
             </GridCol>
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"
@@ -133,7 +134,7 @@ export default function Home() {
               </Paper>
             </GridCol>
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"
@@ -153,7 +154,7 @@ export default function Home() {
               </Paper>
             </GridCol>
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"
@@ -173,7 +174,7 @@ export default function Home() {
               </Paper>
             </GridCol>
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"
@@ -193,7 +194,7 @@ export default function Home() {
               </Paper>
             </GridCol>
             <GridCol span={{ base: 12, sm: 6, md: 4 }}>
-              <Paper p="lg" radius="md" shadow="sm" mih="10rem">
+              <Paper p="lg" radius="md" shadow="sm" mih="10rem" h="100%">
                 <ThemeIcon
                   variant="light"
                   size="xl"

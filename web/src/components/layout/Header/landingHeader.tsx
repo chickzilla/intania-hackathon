@@ -25,26 +25,29 @@ const LandingHeader = () => {
         <Text
           style={{ cursor: "pointer" }}
           onClick={() => section1.scrollIntoView({ alignment: "start" })}
+          visibleFrom="sm"
         >
           Features
         </Text>
         <Text
           style={{ cursor: "pointer" }}
           onClick={() => section2.scrollIntoView({ alignment: "start" })}
+          visibleFrom="sm"
         >
           How it works
         </Text>
         <Text
           style={{ cursor: "pointer" }}
           onClick={() => section3.scrollIntoView({ alignment: "start" })}
+          visibleFrom="sm"
         >
           Testimonials
         </Text>
         <ThemeToggle />
-        <Button variant="default" radius="md">
+        <Button variant="default" radius="md" visibleFrom="xs">
           Log in
         </Button>
-        <Button variant="filled" color="red.8" radius="md">
+        <Button variant="filled" color="red.8" radius="md" visibleFrom="xs">
           Get Started
         </Button>
       </Group>
