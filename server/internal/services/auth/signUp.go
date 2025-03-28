@@ -43,4 +43,5 @@ func (r *Resolver) SignUp(c *gin.Context) {
 		return
 	}
 
+	c.JSON(http.StatusOK, gin.H{"message": "User created successfully"})
 }

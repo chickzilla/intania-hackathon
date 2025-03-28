@@ -3,6 +3,7 @@ package services
 import (
 	"hackathon/internal/services/auth"
 	"hackathon/internal/services/contest"
+	"hackathon/internal/services/course"
 	"hackathon/internal/services/user"
 
 	"gorm.io/gorm"
@@ -19,5 +20,6 @@ func NewHandler(db *gorm.DB) *Handler {
 		Auth:    auth.NewResolver(db),
 		User:    user.NewResolver(db),
 		Contest: contest.NewResolver(db),
+		Course:  course.NewResolver(db),
 	}
 }

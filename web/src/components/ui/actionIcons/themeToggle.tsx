@@ -15,11 +15,13 @@ const ThemeToggle = () => {
         setColorScheme(computedColorScheme === "dark" ? "light" : "dark")
       }
       variant="default"
+      radius="lg"
+      size="lg"
     >
       {darkMode ? (
-        <IconMoon style={{ width: "70%", height: "70%" }} stroke={1.5} />
+        <IconMoon style={{ width: "50%", height: "50%" }} stroke={2} />
       ) : (
-        <IconSun style={{ width: "70%", height: "70%" }} stroke={1.5} />
+        <IconSun style={{ width: "50%", height: "50%" }} stroke={2} />
       )}
     </ActionIcon>
   );
