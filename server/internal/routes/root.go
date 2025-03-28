@@ -23,4 +23,8 @@ func ConfigRouters(server *gin.Engine) {
 	// course
 	server.POST("/course", middleware.AuthMiddleware(), middleware.RequireRoles(models.LecturerRole, models.AdminRole), handler.Course.Create)
 
+	// user
+	server.POST("/add-user", handler.User.AddUser)
+	server.GET("/find-all-user", handler.User.FindAllUser)
+
 }

@@ -39,10 +39,18 @@ func (r *BaseRepo[T]) FindOneByID(ctx context.Context, id any) (*T, error) {
 	return &model, nil
 }
 
-func (r *BaseRepo[T]) FinDByIDs(ctx context.Context, ids []any) ([]*T, error) {
+func (r *BaseRepo[T]) FindByIDs(ctx context.Context, ids []any) ([]*T, error) {
 	var models []*T
 	if err := r.DB.WithContext(ctx).Find(&models, ids).Error; err != nil {
 		return nil, err
 	}
 	return models, nil
+}
+
+func (r *BaseRepo[T]) FindAll(ctx context.Context) (*[]T, error) {
+	var model []T
+	if err := r.DB.WithContext(ctx).Find(&model).Error; err != nil {
+		return nil, err
+	}
+	return &model, nil
 }

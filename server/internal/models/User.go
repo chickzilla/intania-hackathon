@@ -15,15 +15,15 @@ const (
 )
 
 type User struct {
-	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
-	Name      string    `gorm:"type:varchar(50);not null"`
-	Email     string    `gorm:"type:varchar(100);not null"`
-	Password  string    `gorm:"type:varchar(100);not null"`
-	UserRole  string    `gorm:"type:user_role;not null"`
-	RankPoint int64     `gorm:"type:int;not null"`
-	Point     int64     `gorm:"type:int;not null"`
-	CreatedAt time.Time `gorm:"type:timestamp;default:now()"`
-	UpdatedAt time.Time `gorm:"type:timestamp;default:now()"`
+	ID        uuid.UUID  `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
+	Name      string     `gorm:"type:varchar(50);not null"`
+	Email     string     `gorm:"type:varchar(100);not null"`
+	Password  string     `gorm:"type:varchar(100);not null"`
+	UserRole  string     `gorm:"type:user_role;not null"`
+	RankPoint int64      `gorm:"type:int;not null"`
+	Point     int64      `gorm:"type:int;not null"`
+	CreatedAt *time.Time `gorm:"type:timestamp;default:now()"`
+	UpdatedAt *time.Time `gorm:"type:timestamp;default:now()"`
 }
 
 func MigrateUser(db *gorm.DB) error {
