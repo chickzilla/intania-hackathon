@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import ThemeToggle from "../ui/actionIcons/themeToggle";
+import ThemeToggle from "../../ui/actionIcons/themeToggle";
 import { IconBell } from "@tabler/icons-react";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
