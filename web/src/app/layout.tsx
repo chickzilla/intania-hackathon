@@ -5,10 +5,10 @@ import {
   MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
+import AppLayout from "@/components/layout/appLayout";
 
 export const metadata = {
-  title: "My Mantine app",
-  description: "I have followed setup instructions carefully",
+  title: "Scuola",
 };
 
 export default function RootLayout({
@@ -22,7 +22,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <AppLayout>{children}</AppLayout>
+        </MantineProvider>
       </body>
     </html>
   );
