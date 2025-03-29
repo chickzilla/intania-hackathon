@@ -46,7 +46,7 @@ func ConfigRouters(server *gin.Engine) {
 		handler.Module.FindAllInCourse)
 
 	// user
-	server.POST("/add-user", handler.User.AddUser) // register?
+	// server.POST("/add-user", handler.User.AddUser) // register?
 	server.GET("/find-all-user", handler.User.FindAllUser)
 
 	// contest
@@ -59,6 +59,17 @@ func ConfigRouters(server *gin.Engine) {
 	participantGroup := server.Group("/participant")
 	participantGroup.Use(middleware.AuthMiddleware())
 	participantGroup.POST("/join", handler.Participant.JoinContest)
+
+	// Achievement
+	achievementGroup := server.Group("/achievement")
+	achievementGroup.Use(middleware.AuthMiddleware())
+	achievementGroup.POST("/createAchievement", middleware.RequireRoles("ADMIN"), handler.Achievement.AddAchievement)
+
+	//UserAchievement
+	userAchievementGroup := server.Group("/userAchievement")
+	userAchievementGroup.Use(middleware.AuthMiddleware())
+	userAchievementGroup.POST("/userGetAchievement", middleware.RequireRoles("ADMIN"), handler.UserAchievement.UserGetAchievement)
+
 	//reward
 	rewardGroup := server.Group("/reward")
 	rewardGroup.Use(middleware.AuthMiddleware())

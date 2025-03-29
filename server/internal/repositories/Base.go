@@ -3,6 +3,7 @@ package repositories
 import (
 	"context"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -53,4 +54,12 @@ func (r *BaseRepo[T]) FindAll(ctx context.Context) (*[]T, error) {
 		return nil, err
 	}
 	return &model, nil
+}
+
+func (r *BaseRepo[T]) IsExist(ctx context.Context, id uuid.UUID) bool {
+	var model T
+	if err := r.DB.WithContext(ctx).Find(&model, id).Error; err != nil {
+		return false
+	}
+	return true
 }
