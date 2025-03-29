@@ -8,7 +8,9 @@ import { COURSE_ACHIEVEMENT } from "@/enum/course/courseAchievement";
 import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/course/courseStatus";
 import { CompetitionsList } from "@/interfaces/listCompetitions";
 import { CoursesList } from "@/interfaces/listCouses";
+import addPoint from "@/services/user/addPoint";
 import { Stack } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { count } from "console";
 import { on } from "events";
 import { title } from "process";
@@ -16,25 +18,39 @@ import { useEffect, useState } from "react";
 
 // TODO: This Page
 export default function CoursesPage() {
-  const [search, setSearch] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<string>("");
-  const [filteredCourses, setFilteredCourses] = useState<CoursesList>({
-    courses: [],
-  });
-  // TODO: Modify Onsearch To get data to fetch listData
-  const searchHandler = (e: string) => {
-    console.log(e);
-    setSearch(e);
-  };
-  const searchByTabHandler = (tab: string) => {
-    console.log(tab);
-    setActiveTab(tab);
-    setSearch("");
-  };
+    const [search, setSearch] = useState<string>("");
+    const [activeTab, setActiveTab] = useState<string>("");
+    const [filteredCourses, setFilteredCourses] = useState<CoursesList>({
+        courses: [],
+    });
+    // TODO: Modify Onsearch To get data to fetch listData
+    const searchHandler = (e: string) => {
+        console.log(e);
+        setSearch(e);
+    };
+    const searchByTabHandler = (tab: string) => {
+        console.log(tab);
+        setActiveTab(tab);
+        setSearch("");
+    };
 
     const handleComplete = (point: number) => {
-        console.log("Clicked Complete!");
-        console.log("You receive", point);
+        addPoint(point)
+            .then((res) => {
+                notifications.show({
+                    title: "Complete Course",
+                    message: "Sending you to Courses Page",
+                    color: "green",
+                });
+                window.location.href = "/courses";
+            })
+            .catch((err) => {
+                notifications.show({
+                    title: "Something went wrong",
+                    message: err.message || "Complete course failed",
+                    color: "red",
+                });
+            });
         setActiveTab("completed");
     };
 
@@ -46,8 +62,8 @@ export default function CoursesPage() {
         onSearchByTab: searchByTabHandler,
     };
 
-  useEffect(() => {
-    let filtered = mockList.courses;
+    useEffect(() => {
+        let filtered = mockList.courses;
 
         if (activeTab === "enrolled") {
             filtered = filtered.filter(
@@ -63,15 +79,15 @@ export default function CoursesPage() {
             );
         }
 
-    if (search.trim()) {
-      const lower = search.toLowerCase();
-      filtered = filtered.filter((course) =>
-        course.title.toLowerCase().includes(lower)
-      );
-    }
+        if (search.trim()) {
+            const lower = search.toLowerCase();
+            filtered = filtered.filter((course) =>
+                course.title.toLowerCase().includes(lower)
+            );
+        }
 
-    setFilteredCourses({ courses: filtered });
-  }, [search, activeTab]);
+        setFilteredCourses({ courses: filtered });
+    }, [search, activeTab]);
 
     // TODO: Modify to real Data
     const mockList: CoursesList = {
