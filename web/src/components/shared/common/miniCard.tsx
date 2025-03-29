@@ -58,7 +58,7 @@ export default function MiniCard(props: CardProps) {
                             ))}
                         </Stack>
                     </Card>
-                    {!course.isEnrolled && !course.isCompleted ? (
+                    {!course.isEnrolled ? (
                         <Button
                             fullWidth
                             mt="md"
