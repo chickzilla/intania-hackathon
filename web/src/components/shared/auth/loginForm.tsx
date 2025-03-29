@@ -1,5 +1,6 @@
 "use client";
 import useLoginForm from "@/forms/useLoginForm";
+import login from "@/services/auth/login";
 import {
   Anchor,
   Button,
@@ -14,11 +15,33 @@ import {
 } from "@mantine/core";
 
 import { IconBrandGithub, IconBrandGoogleFilled } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
 const LoginForm = () => {
   const form = useLoginForm();
 
   return (
-    <form onSubmit={form.onSubmit((values) => {})}>
+    <form
+      onSubmit={form.onSubmit((values) => {
+        login(values)
+          .then((res) => {
+            window.localStorage.setItem("jwt_token", res.message);
+            notifications.show({
+              title: "Login successful",
+              message: "You have successfully logged in",
+              color: "green",
+            });
+            window.location.href = "/";
+          })
+          .catch((err) => {
+            console.log(err);
+            notifications.show({
+              title: "Something went wrong",
+              message: err.message || "Login failed",
+              color: "red",
+            });
+          });
+      })}
+    >
       <Stack>
         <Stack gap="0">
           <Center>
