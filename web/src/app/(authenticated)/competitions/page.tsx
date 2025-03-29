@@ -54,7 +54,7 @@ export default function CompetitionsPage() {
     }, [search, activeTab]);
 
     // TODO: Modify to real Data
-    const mockList2: CompetitionsList = {
+    const mock: CompetitionsList = {
         competitions: [
             {
                 id: "1",
@@ -143,6 +143,7 @@ export default function CompetitionsPage() {
             },
         ],
     };
+    let mockList2 = mock;
     return (
         <Stack>
             <Header
