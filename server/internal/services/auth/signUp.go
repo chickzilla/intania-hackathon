@@ -9,9 +9,12 @@ import (
 )
 
 type SignUpRequest struct {
-	Email    string `json:"email"`
-	Role     string `json:"role"`
-	Password string `json:"password"`
+	FullName  string `json:"full_name"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	UserRole  string `json:"user_role"`
+	RankPoint int64  `json:"rank_point"`
+	Point     int64  `json:"point"`
 }
 
 func (r *Resolver) SignUp(c *gin.Context) {
@@ -34,9 +37,12 @@ func (r *Resolver) SignUp(c *gin.Context) {
 	}
 
 	newUser := models.User{
-		Email:    req.Email,
-		UserRole: req.Role,
-		Password: string(hashed),
+		FullName:  req.FullName,
+		Email:     req.Email,
+		Password:  string(hashed),
+		UserRole:  req.UserRole,
+		RankPoint: req.RankPoint,
+		Point:     req.Point,
 	}
 	if err := r.UserRepo.AddOne(c, &newUser); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})

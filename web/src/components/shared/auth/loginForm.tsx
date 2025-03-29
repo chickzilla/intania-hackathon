@@ -24,7 +24,7 @@ const LoginForm = () => {
       onSubmit={form.onSubmit((values) => {
         login(values)
           .then((res) => {
-            window.localStorage.setItem("jwt_token", res.message);
+            window.sessionStorage.setItem("jwt_token", res.message);
             notifications.show({
               title: "Login successful",
               message: "You have successfully logged in",

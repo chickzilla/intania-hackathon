@@ -2,6 +2,7 @@
 
 import { USER_ROLE } from "@/enum/auth/user-role";
 import useRegisterForm from "@/forms/useRegisterForm";
+import register from "@/services/auth/register";
 import {
   Anchor,
   Button,
@@ -15,6 +16,7 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 
 import {
   IconRobotFace,
@@ -50,7 +52,26 @@ const RegisterForm = () => {
     },
   ];
   return (
-    <form onSubmit={form.onSubmit((values) => {})}>
+    <form
+      onSubmit={form.onSubmit((values) => {
+        register(values)
+          .then((res) => {
+            notifications.show({
+              title: "Register successful",
+              message: "Sending you to login page",
+              color: "green",
+            });
+            window.location.href = "/login";
+          })
+          .catch((err) => {
+            notifications.show({
+              title: "Something went wrong",
+              message: err.message || "Register failed",
+              color: "red",
+            });
+          });
+      })}
+    >
       <Stack>
         <Stack gap="0">
           <Center>

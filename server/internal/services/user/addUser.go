@@ -7,7 +7,7 @@ import (
 )
 
 type AddUserRequest struct {
-	Name      string `json:"name"`
+	FullName  string `json:"full_name"`
 	Email     string `json:"email"`
 	Password  string `json:"password"`
 	UserRole  string `json:"user_role"`
@@ -22,7 +22,7 @@ func (r *Resolver) AddUser(c *gin.Context) {
 		return
 	}
 	model := models.User{
-		Name:      req.Name,
+		FullName:  req.FullName,
 		Email:     req.Email,
 		Password:  req.Password,
 		UserRole:  req.UserRole,
