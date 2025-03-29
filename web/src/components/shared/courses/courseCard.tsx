@@ -1,4 +1,4 @@
-import { COURSE_LEVEL } from "@/enum/cousres/courseStatus";
+import { COURSE_LEVEL } from "@/enum/course/courseStatus";
 import { CourseDetails } from "@/interfaces/listCouses";
 import {
     Group,

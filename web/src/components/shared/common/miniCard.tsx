@@ -1,5 +1,5 @@
 import { formatDate } from "@/app/functions/dateFormat";
-import { COURSE_STATUS } from "@/enum/cousres/courseStatus";
+import { COURSE_STATUS } from "@/enum/course/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
 import { Card, Image, Text, Stack, Group, Badge, Button } from "@mantine/core";
