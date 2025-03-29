@@ -142,22 +142,40 @@ export default function MiniCard(props: CardProps) {
                             </Group>
                         </Stack>
                     </Card>
+
                     {currentDate > competition.endDate ? (
                         <></>
                     ) : (
-                        <Button
-                            fullWidth
-                            mt="md"
-                            radius="md"
-                            onClick={() => {
-                                props.onRegister?.(competition.id);
-                            }}
-                            disabled={competition.isRegistered}
-                        >
-                            {!competition.isRegistered
-                                ? "Register Now"
-                                : "Registered"}
-                        </Button>
+                        <>
+                            <Button
+                                fullWidth
+                                mt="md"
+                                radius="md"
+                                onClick={() => {
+                                    props.onRegister?.(competition.id);
+                                }}
+                                disabled={competition.isRegistered}
+                            >
+                                {!competition.isRegistered
+                                    ? "Register Now"
+                                    : "Registered"}
+                            </Button>
+                            {competition.isRegistered ? (
+                                <Button
+                                    fullWidth
+                                    radius="md"
+                                    onClick={() => {
+                                        // TODO: Implement Complete Competition
+                                        console.log("Complete Competition");
+                                        window.location.href = "/competitions";
+                                    }}
+                                >
+                                    Complete Competition
+                                </Button>
+                            ) : (
+                                <></>
+                            )}
+                        </>
                     )}
                 </Stack>
             ) : (
