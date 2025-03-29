@@ -46,8 +46,10 @@ func ConfigRouters(server *gin.Engine) {
 		handler.Module.FindAllInCourse)
 
 	// user
-	// server.POST("/add-user", handler.User.AddUser) // register?
-	server.GET("/find-all-user", handler.User.FindAllUser)
+	userGroup := server.Group("/user")
+	userGroup.POST("/add-user", handler.User.AddUser) // register?
+	userGroup.GET("/find-all-user", handler.User.FindAllUser)
+	userGroup.GET("/ranking", handler.User.GetRank)
 
 	// contest
 	contestGroup := server.Group("/contest")
