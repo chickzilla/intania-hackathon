@@ -23,6 +23,7 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import {
+  IconBook,
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandX,
@@ -168,6 +169,67 @@ const ProfilePage = () => {
                     Activity
                   </Text>
                   <Text c="gray">Your recent learning activity</Text>
+                  <Stack mt="sm">
+                    <Group>
+                      <ThemeIcon
+                        size="lg"
+                        radius="xl"
+                        variant="light"
+                        color="green"
+                      >
+                        <IconTrophy />
+                      </ThemeIcon>
+                      <Stack gap={0}>
+                        <Text fw={500}>Completed React Fundamentals Quiz</Text>
+                        <Text c="gray" size="sm">
+                          Score: 92/100
+                        </Text>
+                        <Text c="gray" size="sm">
+                          2 days ago
+                        </Text>
+                      </Stack>
+                    </Group>
+                    <Divider />
+                    <Group>
+                      <ThemeIcon
+                        size="lg"
+                        radius="xl"
+                        variant="light"
+                        color="blue"
+                      >
+                        <IconBook />
+                      </ThemeIcon>
+                      <Stack gap={0}>
+                        <Text fw={500}>Started Advanced JavaScript Course</Text>
+                        <Text c="gray" size="sm">
+                          Module 1: ES6 Features
+                        </Text>
+                        <Text c="gray" size="sm">
+                          4 days ago
+                        </Text>
+                      </Stack>
+                    </Group>
+                    <Divider />
+                    <Group>
+                      <ThemeIcon
+                        size="lg"
+                        radius="xl"
+                        variant="light"
+                        color="grape"
+                      >
+                        <IconCertificate2 />
+                      </ThemeIcon>
+                      <Stack gap={0}>
+                        <Text fw={500}>Earned "JavaScript Ninja" Badge</Text>
+                        <Text c="gray" size="sm">
+                          Completed all JavaScript courses
+                        </Text>
+                        <Text c="gray" size="sm">
+                          1 week ago
+                        </Text>
+                      </Stack>
+                    </Group>
+                  </Stack>
                 </Paper>
               </>
             )}
@@ -205,7 +267,7 @@ const ProfilePage = () => {
                       <BadgesDisplay
                         label={"Problem Solver"}
                         icon={<IconTrophy />}
-                        color="purple"
+                        color="grape"
                       />
                     </GridCol>
                     <GridCol span={{ base: 6, xs: 4, md: 3 }}>
