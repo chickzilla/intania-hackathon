@@ -42,18 +42,37 @@ func ConfigRouters(server *gin.Engine) {
 		handler.Module.Create)
 	moduleGroup.GET("/find-one",
 		handler.Module.FindByID)
-	moduleGroup.GET("/find-in-course",
+	moduleGroup.GET("/course-module",
 		handler.Module.FindAllInCourse)
 
 	// user
 	server.POST("/add-user", handler.User.AddUser) // register?
 	server.GET("/find-all-user", handler.User.FindAllUser)
 
-	//contest
+	// contest
 	contestGroup := server.Group("/contest")
 	contestGroup.Use(middleware.AuthMiddleware())
-	contestGroup.POST("/create",
-		middleware.RequireRoles("LECTURER"),
-		handler.Contest.AddContest)
+	contestGroup.POST("/create", handler.Contest.AddContest)
+	// middleware.RequireRoles("LECTURER"),
+
+	// participant
+	participantGroup := server.Group("/participant")
+	participantGroup.Use(middleware.AuthMiddleware())
+	participantGroup.POST("/join", handler.Participant.JoinContest)
+	//reward
+	rewardGroup := server.Group("/reward")
+	rewardGroup.Use(middleware.AuthMiddleware())
+	rewardGroup.POST("/create",
+		middleware.RequireRoles("ADMIN", "LECTURER"),
+		handler.Reward.Create)
+	rewardGroup.GET("/find-one",
+		handler.Reward.FindByID)
+	rewardGroup.GET("/user-reward",
+		handler.Reward.FindAllByUserId)
+	rewardGroup.GET("/find-all",
+		handler.Reward.FindAll)
+	rewardGroup.POST("/claim",
+		middleware.AuthMiddleware(),
+		handler.Reward.Claim)
 
 }
