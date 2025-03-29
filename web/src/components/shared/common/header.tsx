@@ -21,13 +21,11 @@ import {
 } from "@tabler/icons-react";
 import { useState } from "react";
 
-export default function Header({
-    title,
-    description,
-    onSearch,
-    onSearchByTab,
-    tabs,
-}: HeaderProps) {
+type Props = HeaderProps;
+
+export default function Header(props: Props) {
+    const { title, description, tabs, onSearch, onSearchByTab } = props;
+
     const computedColorScheme = useComputedColorScheme();
     const darkMode = computedColorScheme !== "light";
 
