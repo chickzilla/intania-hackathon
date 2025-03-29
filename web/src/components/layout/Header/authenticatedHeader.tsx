@@ -1,6 +1,6 @@
 "use client";
 import ThemeToggle from "@/components/ui/actionIcons/themeToggle";
-import { Group, Text, Avatar, Box, Menu } from "@mantine/core";
+import { Group, Text, Avatar, Box, Menu, Center } from "@mantine/core";
 import {
   IconDeviceGamepad2,
   IconLogout2,
@@ -16,10 +16,7 @@ const AuthenticatedHeader = () => {
 
   return (
     <Group h="100%" px="xl" justify="space-between">
-      <Box
-        w={{ base: "30%", md: "20%", sm: "15%" }}
-        style={{ display: "flex", alignItems: "center" }}
-      >
+      <Center inline>
         <IconDeviceGamepad2
           style={{ width: "1.5em", height: "1.5em" }}
           stroke={1.5}
@@ -28,28 +25,27 @@ const AuthenticatedHeader = () => {
         <Text ml="xs" size="lg" fw={700}>
           Scuola
         </Text>
-      </Box>
+      </Center>
 
-      <Group
-        w={{ base: "30%", md: "50%", sm: "60%" }}
-        justify="center"
-        visibleFrom="sm"
-      >
+      <Group visibleFrom="sm" gap="lg">
         <Text
           style={{ cursor: "pointer" }}
           onClick={() => router.push("/dashboard")}
           visibleFrom="sm"
-          size="lg"
-          fw={600}
         >
           Dashboard
         </Text>
         <Text
           style={{ cursor: "pointer" }}
+          onClick={() => router.push("/profile")}
+          visibleFrom="sm"
+        >
+          Profile
+        </Text>
+        <Text
+          style={{ cursor: "pointer" }}
           onClick={() => router.push("/courses")}
           visibleFrom="sm"
-          size="lg"
-          fw={600}
         >
           Courses
         </Text>
@@ -57,17 +53,20 @@ const AuthenticatedHeader = () => {
           style={{ cursor: "pointer" }}
           onClick={() => router.push("/competitions")}
           visibleFrom="sm"
-          size="lg"
-          fw={600}
         >
           Competitions
         </Text>
       </Group>
-      <Group w={{ base: "30%", md: "20%", sm: "15%" }} justify="flex-end">
+      <Group>
         <ThemeToggle />
-        <Menu trigger="click-hover" openDelay={100} closeDelay={400}>
+        <Menu trigger="click" openDelay={100} closeDelay={400}>
           <Menu.Target>
-            <Avatar key={userName} name={userName} color="red"></Avatar>
+            <Avatar
+              style={{ cursor: "pointer" }}
+              key={userName}
+              name={userName}
+              color="red"
+            ></Avatar>
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Item

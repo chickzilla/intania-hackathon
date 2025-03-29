@@ -4,8 +4,8 @@ import ListCard from "@/components/shared/common/listCard";
 import { CoursesHeader } from "@/constants/header";
 import { USER_ROLE } from "@/enum/auth/user-role";
 import { COMPETITION_STATUS } from "@/enum/competitions/competitionStatus";
-import { COURSE_ACHIEVEMENT } from "@/enum/cousres/courseAchievement";
-import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/cousres/courseStatus";
+import { COURSE_ACHIEVEMENT } from "@/enum/course/courseAchievement";
+import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/course/courseStatus";
 import { CompetitionsList } from "@/interfaces/listCompetitions";
 import { CoursesList } from "@/interfaces/listCouses";
 import { Stack } from "@mantine/core";
@@ -16,21 +16,21 @@ import { useEffect, useState } from "react";
 
 // TODO: This Page
 export default function CoursesPage() {
-    const [search, setSearch] = useState<string>("");
-    const [activeTab, setActiveTab] = useState<string>("");
-    const [filteredCourses, setFilteredCourses] = useState<CoursesList>({
-        courses: [],
-    });
-    // TODO: Modify Onsearch To get data to fetch listData
-    const searchHandler = (e: string) => {
-        console.log(e);
-        setSearch(e);
-    };
-    const searchByTabHandler = (tab: string) => {
-        console.log(tab);
-        setActiveTab(tab);
-        setSearch("");
-    };
+  const [search, setSearch] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<string>("");
+  const [filteredCourses, setFilteredCourses] = useState<CoursesList>({
+    courses: [],
+  });
+  // TODO: Modify Onsearch To get data to fetch listData
+  const searchHandler = (e: string) => {
+    console.log(e);
+    setSearch(e);
+  };
+  const searchByTabHandler = (tab: string) => {
+    console.log(tab);
+    setActiveTab(tab);
+    setSearch("");
+  };
 
     const handleComplete = (point: number) => {
         console.log("Clicked Complete!");
@@ -46,8 +46,8 @@ export default function CoursesPage() {
         onSearchByTab: searchByTabHandler,
     };
 
-    useEffect(() => {
-        let filtered = mockList.courses;
+  useEffect(() => {
+    let filtered = mockList.courses;
 
         if (activeTab === "enrolled") {
             filtered = filtered.filter(
@@ -63,15 +63,15 @@ export default function CoursesPage() {
             );
         }
 
-        if (search.trim()) {
-            const lower = search.toLowerCase();
-            filtered = filtered.filter((course) =>
-                course.title.toLowerCase().includes(lower)
-            );
-        }
+    if (search.trim()) {
+      const lower = search.toLowerCase();
+      filtered = filtered.filter((course) =>
+        course.title.toLowerCase().includes(lower)
+      );
+    }
 
-        setFilteredCourses({ courses: filtered });
-    }, [search, activeTab]);
+    setFilteredCourses({ courses: filtered });
+  }, [search, activeTab]);
 
     // TODO: Modify to real Data
     const mockList: CoursesList = {

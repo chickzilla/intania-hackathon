@@ -48,7 +48,10 @@ export default function CourseCard(props: CardProps) {
                 {course.description}
             </Text>
 
-            <CardDetail courseData={course} onComplete={props.onComplete}></CardDetail>
+            <CardDetail
+                courseData={course}
+                onComplete={props.onComplete}
+            ></CardDetail>
         </MTCard>
     );
 }

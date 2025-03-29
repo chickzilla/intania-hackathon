@@ -1,18 +1,18 @@
-import { COURSE_LEVEL } from "@/enum/cousres/courseStatus";
+import { COURSE_LEVEL } from "@/enum/course/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
 import {
-    Modal,
-    ScrollArea,
-    Stack,
-    Group,
-    Badge,
-    Divider,
-    Text,
-    Center,
-    Button,
+  Modal,
+  ScrollArea,
+  Stack,
+  Group,
+  Badge,
+  Divider,
+  Text,
+  Center,
+  Button,
 } from "@mantine/core";
-import CourseModuleContent from "../courses/cousrseModuleContent";
+import CourseModuleContent from "../courses/courseModuleContent";
 import { COMPETITION_LEVEL } from "@/enum/competitions/competitionStatus";
 import CompetitionModuleContent from "../competitions/competitionModuleContent";
 
@@ -25,9 +25,9 @@ type CardProps = {
 };
 
 export default function ModalComponent(props: CardProps) {
-    const course = props.courseData;
-    const competition = props.competitionData;
-    const { opened, close } = props;
+  const course = props.courseData;
+  const competition = props.competitionData;
+  const { opened, close } = props;
 
     return (
         //TODO: Add Close and ActionButton in each

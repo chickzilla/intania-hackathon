@@ -1,11 +1,11 @@
 //TODO: Change to match Attributes
 
-import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/cousres/courseStatus";
+import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/course/courseStatus";
 import { User } from "./userInterface";
-import { COURSE_ACHIEVEMENT } from "@/enum/cousres/courseAchievement";
+import { COURSE_ACHIEVEMENT } from "@/enum/course/courseAchievement";
 
 export interface CoursesList {
-    courses: CourseDetails[];
+  courses: CourseDetails[];
 }
 
 export interface CourseDetails {
@@ -25,6 +25,6 @@ export interface CourseDetails {
 }
 
 interface ModuleDetails {
-    name: string;
-    isFinished: boolean;
+  name: string;
+  isFinished: boolean;
 }
