@@ -1,4 +1,6 @@
 "use client";
+import CourseProgress from "@/components/shared/courses/courseProgress";
+import BadgesDisplay from "@/components/ui/achievements/badgesDisplay";
 import {
   Text,
   Avatar,
@@ -24,8 +26,11 @@ import {
   IconBrandLinkedin,
   IconBrandX,
   IconCalendarWeek,
+  IconCertificate2,
+  IconCode,
   IconMail,
   IconMapPin,
+  IconTrophy,
   IconWorld,
 } from "@tabler/icons-react";
 import { useState } from "react";
@@ -172,6 +177,51 @@ const ProfilePage = () => {
                     Badges
                   </Text>
                   <Text c="gray">Badges you've earned</Text>
+                  <Grid gutter="sm" pt="sm">
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"JavaScript Ninja"}
+                        icon={<IconCode />}
+                        color="yellow"
+                      />
+                    </GridCol>
+
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"React Master"}
+                        icon={<IconCode />}
+                        color="blue"
+                      />
+                    </GridCol>
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"Fast Learner"}
+                        icon={<IconCertificate2 />}
+                        color="green"
+                      />
+                    </GridCol>
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"Problem Solver"}
+                        icon={<IconTrophy />}
+                        color="purple"
+                      />
+                    </GridCol>
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"Team Player"}
+                        icon={<IconTrophy />}
+                        color="red"
+                      />
+                    </GridCol>
+                    <GridCol span={{ base: 6, xs: 4, md: 3 }}>
+                      <BadgesDisplay
+                        label={"Early Bird"}
+                        icon={<IconCertificate2 />}
+                        color="orange"
+                      />
+                    </GridCol>
+                  </Grid>
                 </Paper>
                 <Paper p="lg" radius="lg" withBorder>
                   <Text size="2rem" fw={700}>
@@ -188,12 +238,44 @@ const ProfilePage = () => {
                     Completed Courses
                   </Text>
                   <Text c="gray">Courses you've finished</Text>
+                  <Stack mt="sm">
+                    <CourseProgress
+                      course_name="JavaScript Fundamentals"
+                      modules={12}
+                      date="Jan 2023"
+                      progress={100}
+                    />
+                    <CourseProgress
+                      course_name="React Development"
+                      modules={8}
+                      date="Mar 2023"
+                      progress={100}
+                    />
+                    <CourseProgress
+                      course_name="Node.js Basics"
+                      modules={10}
+                      date="May 2023"
+                      progress={100}
+                    />
+                  </Stack>
                 </Paper>
                 <Paper p="lg" radius="lg" withBorder>
                   <Text size="2rem" fw={700}>
                     In Progress
                   </Text>
                   <Text c="gray">Courses you're currently taking</Text>
+                  <Stack mt="sm">
+                    <CourseProgress
+                      course_name="JavaScript Fundamentals"
+                      modules={12}
+                      progress={75}
+                    />
+                    <CourseProgress
+                      course_name="React Development"
+                      modules={8}
+                      progress={40}
+                    />
+                  </Stack>
                 </Paper>
               </>
             )}
@@ -288,6 +370,7 @@ const ProfilePage = () => {
                         size="lg"
                         radius="xl"
                         bg="red.8"
+                        c="white"
                       >
                         41
                       </ThemeIcon>
@@ -304,6 +387,7 @@ const ProfilePage = () => {
                         size="lg"
                         radius="xl"
                         bg="red.8"
+                        c="white"
                       >
                         42
                       </ThemeIcon>
@@ -320,6 +404,7 @@ const ProfilePage = () => {
                         size="lg"
                         radius="xl"
                         bg="red.8"
+                        c="white"
                       >
                         43
                       </ThemeIcon>
