@@ -32,3 +32,14 @@ func (r *UserRepo) FindByEmail(ctx context.Context, email string) (*models.User,
 	}
 	return &user, nil
 }
+
+func (r *UserRepo) GetRankPositionByRankPoint(ctx context.Context, rankPoint int64) (int64, error) {
+	var count int64
+	if err := r.DB.WithContext(ctx).
+		Model(&models.User{}).
+		Where("rank_point > ?", rankPoint).
+		Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count + 1, nil
+}
