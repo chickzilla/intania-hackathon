@@ -10,6 +10,7 @@ import (
 	"hackathon/internal/services/reward"
 	"hackathon/internal/services/user"
 	"hackathon/internal/services/userachievement"
+	"hackathon/internal/services/userreward"
 	"hackathon/internal/services/video"
 
 	"gorm.io/gorm"
@@ -26,6 +27,7 @@ type Handler struct {
 	Achievement     *achievement.Resolver
 	UserAchievement *userachievement.Resolver
 	Video           *video.Resolver
+	UserReward      *userreward.Resolver
 }
 
 func NewHandler(db *gorm.DB) *Handler {
@@ -40,5 +42,6 @@ func NewHandler(db *gorm.DB) *Handler {
 		Achievement:     achievement.NewResolver(db),
 		UserAchievement: userachievement.NewResolver(db),
 		Video:           video.NewResolver(db),
+		UserReward:      userreward.NewResolver(db),
 	}
 }

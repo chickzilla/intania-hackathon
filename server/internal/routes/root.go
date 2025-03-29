@@ -94,6 +94,11 @@ func ConfigRouters(server *gin.Engine) {
 		middleware.AuthMiddleware(),
 		handler.Reward.Claim)
 
+	// user reward
+	userRewardGroup := server.Group("/user-reward")
+	userRewardGroup.Use(middleware.AuthMiddleware())
+	userRewardGroup.GET("/reward", handler.UserReward.FindAll)
+
 	videoGroup := server.Group("/video")
 	videoGroup.POST("/upload", handler.Video.UploadVideo)
 }
