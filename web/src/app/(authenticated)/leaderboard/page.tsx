@@ -1,20 +1,40 @@
-import { Stack, Table, Title, Text } from "@mantine/core";
+"use client";
 
-const elements = [
-  { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-  { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-  { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-  { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-  { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-];
+import getLeaderBoard from "@/services/rank/getLeaderboard";
+import { User } from "@/types/user";
+import { ScrollArea, Stack, Table, Title, Text } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { useEffect, useState } from "react";
+import cx from "clsx";
+import classes from "./TableScrollArea.module.css"; // 👈 Your CSS module
 
 export default function LeaderBoard() {
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
-      <td>{element.position}</td>
-      <td>{element.name}</td>
-      <td>{element.symbol}</td>
-      <td>{element.mass}</td>
+  const [users, setUsers] = useState<User[]>([]);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      getLeaderBoard()
+        .then((res) => {
+          setUsers(res.result);
+        })
+        .catch((err) => {
+          console.log(err);
+          notifications.show({
+            title: "Error",
+            message: err.message || "Failed to fetch leaderboard",
+            color: "red",
+          });
+        });
+    };
+    fetchData();
+  }, []);
+
+  const rows = users.map((user, index) => (
+    <tr key={user.ID}>
+      <td>{index + 1}</td>
+      <td>{user.FullName}</td>
+      <td>{user.RankPoint}</td>
     </tr>
   ));
 
@@ -24,17 +44,24 @@ export default function LeaderBoard() {
       <Text c="dimmed" mb="md">
         See who’s topping the ranks!
       </Text>
-      <Table striped withColumnBorders>
-        <thead>
-          <tr>
-            <th>Element position</th>
-            <th>Element name</th>
-            <th>Symbol</th>
-            <th>Atomic mass</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
+
+      <ScrollArea
+        h={400}
+        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+      >
+        <Table highlightOnHover striped withColumnBorders>
+          <thead
+            className={cx(classes.header, { [classes.scrolled]: scrolled })}
+          >
+            <tr>
+              <th>Rank</th>
+              <th>Full name</th>
+              <th>Rank point</th>
+            </tr>
+          </thead>
+          <tbody style={{ backgroundColor: "transparent" }}>{rows}</tbody>
+        </Table>
+      </ScrollArea>
     </Stack>
   );
 }
