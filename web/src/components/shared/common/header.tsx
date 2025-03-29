@@ -21,17 +21,17 @@ import {
 } from "@tabler/icons-react";
 import { useState } from "react";
 
-export default function Header({
-    title,
-    description,
-    onSearch,
-    tabs,
-}: HeaderProps) {
+type Props = HeaderProps;
+
+export default function Header(props: Props) {
+    const { title, description, tabs, onSearch, onSearchByTab } = props;
+
     const computedColorScheme = useComputedColorScheme();
     const darkMode = computedColorScheme !== "light";
 
     const [value, setValue] = useState<string>("");
     const activeTab = tabs ? tabs[0].toLowerCase() : "";
+    // TODO: Correct Handlers
     const handleSearch = () => {
         if (value.trim()) {
             onSearch(value.trim());
@@ -104,6 +104,7 @@ export default function Header({
                                     borderRadius: "10px",
                                     textAlign: "center",
                                 }}
+                                onClick={() => onSearchByTab(tab.toLowerCase())}
                             >
                                 {tab}
                             </Tabs.Tab>
