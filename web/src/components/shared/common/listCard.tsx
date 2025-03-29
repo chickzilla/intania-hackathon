@@ -6,6 +6,7 @@ import Card from "./card";
 type ListCardProps = {
     coursesData?: CoursesList;
     competitionsData?: CompetitionsList;
+    onComplete?: (n: number) => void;
 };
 type Props = ListCardProps;
 
@@ -18,7 +19,7 @@ export default function ListCard(props: Props) {
             {courses && courses.length > 0 ? (
                 courses.map((course) => (
                     <GridCol key={course.id} span={{ base: 12, sm: 6, md: 4 }}>
-                        <Card courseData={course} />
+                        <Card courseData={course} onComplete={props.onComplete}/>
                     </GridCol>
                 ))
             ) : competitions && competitions.length > 0 ? (

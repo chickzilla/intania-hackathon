@@ -8,7 +8,7 @@ import {
     Text,
     Image,
 } from "@mantine/core";
-import CardDetail from "../../shared/common/cardDetail";
+import CardDetail from "../common/cardDetail";
 
 type CardProps = {
     course: CourseDetails;

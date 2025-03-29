@@ -21,8 +21,9 @@ import CourseCard from "../../ui/courses/courseCard";
 import CompetitionCard from "../competitions/competitionCard";
 
 type CardProps = {
-  courseData?: CourseDetails;
-  competitionData?: CompetitionsDetails;
+    courseData?: CourseDetails;
+    competitionData?: CompetitionsDetails;
+    onComplete?: (n: number) => void;
 };
 type Props = CardProps;
 
@@ -30,19 +31,19 @@ export default function Card(props: Props) {
   const course = props.courseData;
   const competition = props.competitionData;
 
-  return (
-    <>
-      {course ? (
-        <CourseCard course={course}></CourseCard>
-      ) : competition ? (
-        <CompetitionCard competition={competition}></CompetitionCard>
-      ) : (
-        <Center style={{ height: "100%" }}>
-          <Text size="30px" fw={700}>
-            No Content
-          </Text>
-        </Center>
-      )}
-    </>
-  );
+    return (
+        <>
+            {course ? (
+                <CourseCard course={course} onComplete={props.onComplete}></CourseCard>
+            ) : competition ? (
+                <CompetitionCard competition={competition}></CompetitionCard>
+            ) : (
+                <Center style={{ height: "100%" }}>
+                    <Text size="30px" fw={700}>
+                        No Content
+                    </Text>
+                </Center>
+            )}
+        </>
+    );
 }

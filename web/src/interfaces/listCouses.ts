@@ -9,21 +9,19 @@ export interface CoursesList {
 }
 
 export interface CourseDetails {
-  id: string;
-  title: string;
-  description: string;
-  details: string;
-  objectives: string[];
-  modules: ModuleDetails[];
-  instructor: User;
-  level: COURSE_LEVEL;
-  startDate: Date;
-  endDate: Date;
-  status: COURSE_STATUS;
-  point: number;
-  achievements: COURSE_ACHIEVEMENT[];
-  isEnrolled: boolean;
-  isCompleted: boolean;
+    id: string;
+    title: string;
+    description: string;
+    details: string;
+    objectives: string[];
+    modules: ModuleDetails[];
+    instructor: User;
+    level: COURSE_LEVEL;
+    startDate: Date;
+    endDate: Date;
+    status: COURSE_STATUS;
+    point: number;
+    achievements: COURSE_ACHIEVEMENT[];
 }
 
 interface ModuleDetails {

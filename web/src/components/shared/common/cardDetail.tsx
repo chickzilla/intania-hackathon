@@ -24,18 +24,24 @@ import CourseModuleContent from "../courses/courseModuleContent";
 import ModalComponent from "./modal";
 
 type CardProps = {
-  courseData?: CourseDetails;
-  competitionData?: CompetitionsDetails;
+    courseData?: CourseDetails;
+    competitionData?: CompetitionsDetails;
+    onComplete?: (n: number) => void;
 };
 
 export default function CardDetail(props: CardProps) {
-  const [opened, { open, close }] = useDisclosure(false);
-  return (
-    <>
-      <ModalComponent {...props} opened={opened} close={close}></ModalComponent>
-      <Button onClick={open} fullWidth mt="md" radius="md">
-        View Details
-      </Button>
-    </>
-  );
+    const [opened, { open, close }] = useDisclosure(false);
+    return (
+        <>
+            <ModalComponent
+                {...props}
+                opened={opened}
+                close={close}
+                onComplete={props.onComplete}
+            ></ModalComponent>
+            <Button onClick={open} fullWidth mt="md" radius="md">
+                View Details
+            </Button>
+        </>
+    );
 }
