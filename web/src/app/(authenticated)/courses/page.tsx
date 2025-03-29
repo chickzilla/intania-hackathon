@@ -11,15 +11,24 @@ import { CoursesList } from "@/interfaces/listCouses";
 import { Stack } from "@mantine/core";
 import { on } from "events";
 import { title } from "process";
+import { useEffect, useState } from "react";
 
 // TODO: This Page
 export default function CoursesPage() {
+    const [search, setSearch] = useState<string>("");
+    const [activeTab, setActiveTab] = useState<string>("");
+    const [filteredCourses, setFilteredCourses] = useState<CoursesList>({
+        courses: [],
+    });
     // TODO: Modify Onsearch To get data to fetch listData
     const searchHandler = (e: string) => {
         console.log(e);
+        setSearch(e);
     };
     const searchByTabHandler = (tab: string) => {
         console.log(tab);
+        setActiveTab(tab);
+        setSearch("");
     };
 
     const headerParams = {
@@ -29,6 +38,28 @@ export default function CoursesPage() {
         onSearch: searchHandler,
         onSearchByTab: searchByTabHandler,
     };
+
+    useEffect(() => {
+        let filtered = mockList.courses;
+
+        if (activeTab === "enrolled" || activeTab === "completed") {
+            filtered = filtered.filter(
+                (course) =>
+                    course.status.toLowerCase() === activeTab.toLowerCase()
+            );
+        } else if (activeTab === "available") {
+            filtered = filtered.filter((course) => !course.isEnrolled);
+        }
+
+        if (search.trim()) {
+            const lower = search.toLowerCase();
+            filtered = filtered.filter((course) =>
+                course.title.toLowerCase().includes(lower)
+            );
+        }
+
+        setFilteredCourses({ courses: filtered });
+    }, [search, activeTab]);
 
     // TODO: Modify to real Data
     const mockList: CoursesList = {
@@ -135,7 +166,7 @@ export default function CoursesPage() {
                 onSearch={headerParams.onSearch}
                 onSearchByTab={headerParams.onSearchByTab}
             ></Header>
-            <ListCard coursesData={mockList}></ListCard>
+            <ListCard coursesData={filteredCourses}></ListCard>
         </Stack>
     );
 }
