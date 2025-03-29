@@ -9,3 +9,4 @@ export enum COMPETITION_LEVEL {
     INTERMEDIATE = "intermediate",
     ADVANCED = "advanced",
 }
+

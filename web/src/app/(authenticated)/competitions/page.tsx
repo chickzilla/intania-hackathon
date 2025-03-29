@@ -8,17 +8,50 @@ import {
     COMPETITION_STATUS,
 } from "@/enum/competitions/competitionStatus";
 import { CompetitionsList } from "@/interfaces/listCompetitions";
+import { CoursesList } from "@/interfaces/listCouses";
 import { Stack } from "@mantine/core";
+import { useEffect, useState } from "react";
 
 // TODO: This Page
 export default function CompetitionsPage() {
-    //TODO: Modify Onsearch
+    const [search, setSearch] = useState<string>("");
+    const [activeTab, setActiveTab] = useState<string>(
+        COMPETITION_STATUS.ONGOING
+    );
+    const [filteredCompetitions, setFilteredCompetitions] =
+        useState<CompetitionsList>({
+            competitions: [],
+        });
+    // TODO: Modify Onsearch To get data to fetch listData
     const searchHandler = (e: string) => {
         console.log(e);
+        setSearch(e);
     };
     const searchByTabHandler = (tab: string) => {
         console.log(tab);
+        setActiveTab(tab);
+        setSearch("");
     };
+
+    useEffect(() => {
+        let filtered = mockList2.competitions;
+
+        if (activeTab) {
+            filtered = filtered.filter(
+                (competition) =>
+                    competition.status.toLowerCase() === activeTab.toLowerCase()
+            );
+        }
+
+        if (search.trim()) {
+            const lower = search.toLowerCase();
+            filtered = filtered.filter((course) =>
+                course.title.toLowerCase().includes(lower)
+            );
+        }
+
+        setFilteredCompetitions({ competitions: filtered });
+    }, [search, activeTab]);
 
     // TODO: Modify to real Data
     const mockList2: CompetitionsList = {
@@ -83,6 +116,31 @@ export default function CompetitionsPage() {
                 point: 300,
                 rankingPoint: 150,
             },
+            {
+                id: "4",
+                title: "Done",
+                description: "Description 4",
+                details: "Details 4",
+                requirements: [
+                    "Requirement 1",
+                    "Requirement 2",
+                    "Requirement 3",
+                    "Requirement 4",
+                ],
+                rule: ["Rule 1", "Rule 2", "Rule 3", "Rule 4", "Rule 5"],
+                judgingCriteria: ["Criteria 1", "Criteria 2"],
+                organizer: {
+                    id: "4",
+                    name: "Organizer 4",
+                    role: USER_ROLE.ADMIN_ROLE,
+                },
+                level: COMPETITION_LEVEL.ADVANCED,
+                startDate: new Date(),
+                endDate: new Date(),
+                status: COMPETITION_STATUS.UPCOMING,
+                point: 1000,
+                rankingPoint: 1500,
+            },
         ],
     };
     return (
@@ -94,7 +152,7 @@ export default function CompetitionsPage() {
                 onSearch={searchHandler}
                 onSearchByTab={searchByTabHandler}
             ></Header>
-            <ListCard competitionsData={mockList2} />
+            <ListCard competitionsData={filteredCompetitions} />
         </Stack>
     );
 }
