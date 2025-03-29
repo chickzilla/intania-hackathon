@@ -18,6 +18,7 @@ import {
   ThemeIcon,
   Title,
 } from "@mantine/core";
+import { useScrollIntoView } from "@mantine/hooks";
 import {
   IconArrowRight,
   IconBook,
@@ -42,9 +43,16 @@ export default function Home() {
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
+  const section1 = useScrollIntoView({ duration: 800, offset: 150 });
+  const section2 = useScrollIntoView({ duration: 800, offset: 150 });
+  const section3 = useScrollIntoView({ duration: 800, offset: 150 });
 
   return (
-    <LandingLayout>
+    <LandingLayout
+      scrollToSection1={section1.scrollIntoView}
+      scrollToSection2={section2.scrollIntoView}
+      scrollToSection3={section3.scrollIntoView}
+    >
       <main>
         <Container fluid>
           <Grid>
@@ -103,7 +111,7 @@ export default function Home() {
             </GridCol>
           </Grid>
         </Container>
-        <Container fluid>
+        <Container fluid ref={section1.targetRef}>
           <Stack>
             <Center>
               <Title>Platform Features</Title>
@@ -240,7 +248,7 @@ export default function Home() {
             </Grid>
           </Stack>
         </Container>
-        <Container fluid mt="10rem">
+        <Container fluid mt="10rem" ref={section2.targetRef}>
           <Stack>
             <Center>
               <Title>How It Works</Title>
@@ -271,7 +279,7 @@ export default function Home() {
             ></StepperStep>
           </Stepper>
         </Container>
-        <Container fluid mt="10rem">
+        <Container fluid mt="10rem" ref={section3.targetRef}>
           <Center>
             <Title>What Our Users Say</Title>
           </Center>
