@@ -11,6 +11,7 @@ type CreateRewardRequest struct {
 	Name     string `json:"name"`
 	Detail   string `json:"detail"`
 	ImageURL string `json:"image_url"`
+	Point    int    `json:"point"`
 }
 
 func (r *Resolver) Create(c *gin.Context) {
@@ -30,6 +31,7 @@ func (r *Resolver) Create(c *gin.Context) {
 		Name:      req.Name,
 		Detail:    req.Detail,
 		ImageURL:  req.ImageURL,
+		Point:    req.Point,
 		CreatedBy: idParsed,
 		UpdatedBy: idParsed,
 	}
