@@ -1,6 +1,7 @@
 "use client";
 import CourseProgress from "@/components/shared/courses/courseProgress";
 import BadgesDisplay from "@/components/ui/achievements/badgesDisplay";
+import CertificatesDisplay from "@/components/ui/achievements/certificatesDisplay";
 import {
   Text,
   Avatar,
@@ -228,6 +229,16 @@ const ProfilePage = () => {
                     Certificates
                   </Text>
                   <Text c="gray">Your earned certificates</Text>
+                  <Stack gap={"xs"} mt={"sm"}>
+                    <CertificatesDisplay
+                      subjectName={"JavaScript Fundamentals"}
+                      date={"Jan 2023"}
+                    />
+                    <CertificatesDisplay
+                      subjectName={"React Development"}
+                      date={"Mar 2023"}
+                    />
+                  </Stack>
                 </Paper>
               </>
             )}
@@ -365,13 +376,7 @@ const ProfilePage = () => {
                 <Paper p="sm" radius="lg" withBorder>
                   <Group justify="space-between" w="100%">
                     <Group>
-                      <ThemeIcon
-                        variant="default"
-                        size="lg"
-                        radius="xl"
-                        bg="red.8"
-                        c="white"
-                      >
+                      <ThemeIcon size="lg" radius="xl" bg="red.8" c="white">
                         41
                       </ThemeIcon>
                       <Text>Sarah Johnson</Text>
@@ -382,13 +387,7 @@ const ProfilePage = () => {
                 <Paper p="sm" radius="lg" withBorder>
                   <Group justify="space-between" w="100%">
                     <Group>
-                      <ThemeIcon
-                        variant="default"
-                        size="lg"
-                        radius="xl"
-                        bg="red.8"
-                        c="white"
-                      >
+                      <ThemeIcon size="lg" radius="xl" bg="red.8" c="white">
                         42
                       </ThemeIcon>
                       <Text>You</Text>
@@ -399,13 +398,7 @@ const ProfilePage = () => {
                 <Paper p="sm" radius="lg" withBorder>
                   <Group justify="space-between" w="100%">
                     <Group>
-                      <ThemeIcon
-                        variant="default"
-                        size="lg"
-                        radius="xl"
-                        bg="red.8"
-                        c="white"
-                      >
+                      <ThemeIcon size="lg" radius="xl" bg="red.8" c="white">
                         43
                       </ThemeIcon>
                       <Text>Mike Chen</Text>
