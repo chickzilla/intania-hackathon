@@ -1,6 +1,7 @@
 "use client";
 import ThemeToggle from "@/components/ui/actionIcons/themeToggle";
-import { Group, Text, Avatar, Box, Menu, Center } from "@mantine/core";
+import { Group, Text, Avatar, Menu, Center, Burger } from "@mantine/core";
+
 import {
   IconDeviceGamepad2,
   IconLogout2,
@@ -8,15 +9,26 @@ import {
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
-const AuthenticatedHeader = () => {
+interface AuthenticatedHeaderProps {
+  opened: boolean;
+  toggle: () => void;
+}
+
+const AuthenticatedHeader = ({ opened, toggle }: AuthenticatedHeaderProps) => {
   const router = useRouter();
 
-  // TODO: Modify to get real name
   const userName = "John Doe";
 
   return (
     <Group h="100%" px="xl" justify="space-between">
       <Center inline>
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom="sm"
+          size="sm"
+          mr="sm"
+        />
         <IconDeviceGamepad2
           style={{ width: "1.5em", height: "1.5em" }}
           stroke={1.5}
@@ -71,7 +83,6 @@ const AuthenticatedHeader = () => {
           <Menu.Dropdown>
             <Menu.Item
               leftSection={<IconUserFilled size={16} />}
-              // TODO: Modity to route to profile
               onClick={() => {
                 router.push("/profile");
               }}
@@ -83,7 +94,6 @@ const AuthenticatedHeader = () => {
               color="red"
               leftSection={<IconLogout2 size={16} />}
               onClick={() => {
-                console.log("Logout clicked");
                 window.sessionStorage.removeItem("jwt_token");
                 router.push("/login");
               }}
