@@ -39,7 +39,8 @@ import { useState } from "react";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("Stats");
-  const darkMode = useComputedColorScheme() === "dark";
+  const computedColorScheme = useComputedColorScheme();
+  const darkMode = computedColorScheme === "dark";
   return (
     <Stack>
       <Paper bg="red.8" radius="md" p="xl">
@@ -65,13 +66,13 @@ const ProfilePage = () => {
               </Flex>
               <Center>
                 <Group gap="xs">
-                  <Pill bg="red" c="white">
+                  <Pill bg="red.6" c="white">
                     &lt;Javascript&gt;
                   </Pill>
-                  <Pill bg="red" c="white">
+                  <Pill bg="red.6" c="white">
                     &lt;React&gt;
                   </Pill>
-                  <Pill bg="red" c="white">
+                  <Pill bg="red.6" c="white">
                     &lt;Node.js&gt;
                   </Pill>
                 </Group>
@@ -105,7 +106,11 @@ const ProfilePage = () => {
                   <Text c="gray">Your learning statistics</Text>
                   <Grid my="lg" gutter="xs">
                     <GridCol span={{ base: 12, md: 4 }}>
-                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
+                      <Paper
+                        bg={darkMode ? "dark.6" : "gray.1"}
+                        p="lg"
+                        h="100%"
+                      >
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">
@@ -121,7 +126,11 @@ const ProfilePage = () => {
                       </Paper>
                     </GridCol>
                     <GridCol span={{ base: 12, xs: 6, md: 4 }}>
-                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
+                      <Paper
+                        bg={darkMode ? "dark.6" : "gray.1"}
+                        p="lg"
+                        h="100%"
+                      >
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">
@@ -137,7 +146,11 @@ const ProfilePage = () => {
                       </Paper>
                     </GridCol>
                     <GridCol span={{ base: 12, xs: 6, md: 4 }}>
-                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
+                      <Paper
+                        bg={darkMode ? "dark.6" : "gray.1"}
+                        p="lg"
+                        h="100%"
+                      >
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">

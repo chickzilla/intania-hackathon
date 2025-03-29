@@ -6,7 +6,7 @@ import {
   MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
-import LandingLayout from "@/components/layout/AppShell/landingLayout";
+
 import { theme } from "@/theme";
 import { Notifications } from "@mantine/notifications";
 

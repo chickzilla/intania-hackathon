@@ -1,12 +1,23 @@
 "use client";
-import { AppShell, useComputedColorScheme, Box } from "@mantine/core";
+
+import {
+  AppShell,
+  useComputedColorScheme,
+  Box,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import AuthenticatedHeader from "../Header/authenticatedHeader";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
-  const darkMode = useComputedColorScheme() === "dark";
+  const { colorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light");
+
+  const darkMode =
+    (colorScheme === "auto" ? computedColorScheme : colorScheme) === "dark";
+
   return (
     <Box bg={darkMode ? "dark.6" : "gray.0"}>
       <AppShell
@@ -19,7 +30,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         padding="md"
       >
         <AppShell.Header>
-          <AuthenticatedHeader />
+          <AuthenticatedHeader opened={opened} toggle={toggle} />
         </AppShell.Header>
 
         <AppShell.Navbar py="md" px={4}>
