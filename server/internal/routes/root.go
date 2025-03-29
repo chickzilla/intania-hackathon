@@ -66,11 +66,13 @@ func ConfigRouters(server *gin.Engine) {
 	achievementGroup := server.Group("/achievement")
 	achievementGroup.Use(middleware.AuthMiddleware())
 	achievementGroup.POST("/createAchievement", middleware.RequireRoles("ADMIN"), handler.Achievement.AddAchievement)
+	achievementGroup.GET("/allAchievement", handler.Achievement.FindAllAchievement)
 
 	//UserAchievement
 	userAchievementGroup := server.Group("/userAchievement")
 	userAchievementGroup.Use(middleware.AuthMiddleware())
 	userAchievementGroup.POST("/userGetAchievement", middleware.RequireRoles("ADMIN"), handler.UserAchievement.UserGetAchievement)
+	userAchievementGroup.GET("/allUserAchievement", handler.UserAchievement.FindAchievementById)
 
 	//reward
 	rewardGroup := server.Group("/reward")
