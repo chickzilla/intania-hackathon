@@ -26,7 +26,11 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           {/* SOME LINK */}
         </AppShell.Navbar>
 
-        <AppShell.Main>{children}</AppShell.Main>
+        <AppShell.Main
+          mx={{ base: "1rem", xs: "2rem", sm: "4rem", md: "6rem", lg: "8rem" }}
+        >
+          {children}
+        </AppShell.Main>
       </AppShell>
     </Box>
   );
