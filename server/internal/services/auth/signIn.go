@@ -40,7 +40,7 @@ func (r *Resolver) SignIn(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"message": token})
+	c.JSON(200, gin.H{"token": token, "id": user.ID})
 }
 
 func GenerateKey(id uuid.UUID, userRole string) (string, error) {

@@ -68,6 +68,13 @@ const AuthenticatedHeader = ({ opened, toggle }: AuthenticatedHeaderProps) => {
         >
           Competitions
         </Text>
+        <Text
+          style={{ cursor: "pointer" }}
+          onClick={() => router.push("/leaderboard")}
+          visibleFrom="sm"
+        >
+          Leaderboard
+        </Text>
       </Group>
       <Group>
         <ThemeToggle />
