@@ -50,6 +50,8 @@ func ConfigRouters(server *gin.Engine) {
 	userGroup.POST("/add-user", handler.User.AddUser) // register?
 	userGroup.GET("/find-all-user", handler.User.FindAllUser)
 	userGroup.GET("/ranking", handler.User.GetRank)
+	userGroup.POST("/add-point",
+		handler.User.AddPoint)
 
 	// contest
 	contestGroup := server.Group("/contest")
