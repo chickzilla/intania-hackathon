@@ -11,6 +11,7 @@ import {
     Image,
 } from "@mantine/core";
 import { IconMoneybag, IconAward } from "@tabler/icons-react";
+import CardDetail from "../common/cardDetail";
 
 type CardProps = {
     competition: CompetitionsDetails;
@@ -63,10 +64,7 @@ export default function CompetitionCard(props: CardProps) {
                 </Text>
             </Group>
 
-            {/* TODO: Open Dialog */}
-            <Button fullWidth mt="md" radius="md">
-                View Details
-            </Button>
+            <CardDetail competitionData={competition} />
         </MTCard>
     );
 }
