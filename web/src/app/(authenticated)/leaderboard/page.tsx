@@ -13,18 +13,30 @@ import {
   TableTh,
   TableThead,
   TableTr,
+  Center,
+  Group,
+  Paper,
+  ThemeIcon,
+  useComputedColorScheme,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
 
 export default function LeaderBoard() {
   const [users, setUsers] = useState<User[]>([]);
+  const [currentUserRank, setCurrentUserRank] = useState<number>(0);
+  const darkMode = useComputedColorScheme() === "dark";
 
   useEffect(() => {
     const fetchData = async () => {
+      const user_id = sessionStorage.getItem("id");
       getLeaderBoard()
         .then((res) => {
           setUsers(res.result);
+          const userRank = res.result.findIndex(
+            (user: User) => user.ID === user_id
+          );
+          setCurrentUserRank(userRank + 1 || 0);
         })
         .catch((err) => {
           console.log(err);
@@ -38,46 +50,45 @@ export default function LeaderBoard() {
     fetchData();
   }, []);
 
-  const rows = users.map((user, index) => (
-    <tr key={user.ID}>
-      <td style={{ textAlign: "center", verticalAlign: "middle" }}>
-        {index + 1}
-      </td>
-      <td style={{ textAlign: "center", verticalAlign: "middle" }}>
-        {user.FullName}
-      </td>
-      <td style={{ textAlign: "center", verticalAlign: "middle" }}>
-        {user.RankPoint}
-      </td>
-    </tr>
-  ));
-
   return (
     <Stack px="xl" pt="lg">
       <Title order={1}>🏆 Leaderboard</Title>
       <Text c="dimmed" mb="md">
         See who’s topping the ranks!
       </Text>
-
-      <Table stickyHeader stickyHeaderOffset={60}>
-        <TableThead style={{ textAlign: "center", verticalAlign: "middle" }}>
-          <TableTr>
-            <TableTh style={{ textAlign: "center", verticalAlign: "middle" }}>
-              Rank
-            </TableTh>
-            <TableTh style={{ textAlign: "center", verticalAlign: "middle" }}>
-              Name
-            </TableTh>
-            <TableTh style={{ textAlign: "center", verticalAlign: "middle" }}>
-              Rank point
-            </TableTh>
-          </TableTr>
-        </TableThead>
-        <TableTbody>{rows}</TableTbody>
-        <TableCaption>
-          This leaderboard shows the top users based on their rank points.
-        </TableCaption>
-      </Table>
+      <Paper p="lg" radius="lg" withBorder>
+        <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg" my="sm">
+          <Stack gap={0}>
+            <Center>
+              <Text size="2.5rem" fw={700} c="red.8">
+                #{currentUserRank.toLocaleString()}
+              </Text>
+            </Center>
+            <Center>
+              <Text c="gray" size="sm">
+                Global Rank
+              </Text>
+            </Center>
+          </Stack>
+        </Paper>
+        <ScrollArea h={400}>
+          <Stack gap="xs">
+            {users.map((user, index) => (
+              <Paper key={user.ID} p="sm" radius="lg" withBorder>
+                <Group justify="space-between" w="100%">
+                  <Group>
+                    <ThemeIcon size="lg" radius="xl" bg="red.8" c="white">
+                      {index + 1}
+                    </ThemeIcon>
+                    <Text>{user.FullName}</Text>
+                  </Group>
+                  <Text>{user.RankPoint.toLocaleString()} EXP</Text>
+                </Group>
+              </Paper>
+            ))}
+          </Stack>
+        </ScrollArea>
+      </Paper>
     </Stack>
   );
 }
