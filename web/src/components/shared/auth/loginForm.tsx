@@ -30,7 +30,7 @@ const LoginForm = () => {
               message: "You have successfully logged in",
               color: "green",
             });
-            window.location.href = "/";
+            window.location.href = "/dashboard";
           })
           .catch((err) => {
             console.log(err);
