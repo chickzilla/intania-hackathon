@@ -43,3 +43,13 @@ func (r *UserRepo) GetRankPositionByRankPoint(ctx context.Context, rankPoint int
 	}
 	return count + 1, nil
 }
+
+func (r *UserRepo) FindAllOrderedByRank(ctx context.Context) ([]models.User, error) {
+	var users []models.User
+	if err := r.DB.WithContext(ctx).
+		Order("rank_point DESC").
+		Find(&users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+}
