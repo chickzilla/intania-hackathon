@@ -318,8 +318,13 @@ export default function Home() {
           </Grid>
         </Container>
         <Container fluid mt="10rem">
-          <Paper bg="red.8" py="5rem" mx="10rem" radius="lg">
-            <Stack>
+          <Paper
+            bg="red.8"
+            py="5rem"
+            mx={{ base: "1rem", xs: "2rem", sm: "3rem", md: "4rem" }}
+            radius="lg"
+          >
+            <Stack mx={{ base: "1rem", xs: "2rem", sm: "3rem", md: "4rem" }}>
               <Center>
                 <Title c="white">Ready to Start Your Learning Journey?</Title>
               </Center>
@@ -346,7 +351,7 @@ export default function Home() {
         </Container>
         <Divider my="5rem" />
         <Container fluid>
-          <Grid mx="10rem">
+          <Grid mx={{ base: "1rem", xs: "2rem", sm: "3rem", md: "4rem" }}>
             <GridCol span={{ base: 12, md: 3 }}>
               <Stack gap="xs">
                 <Group gap="xs">
