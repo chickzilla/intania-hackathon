@@ -27,7 +27,7 @@ const AuthenticatedHeader = () => {
         </Text>
       </Center>
 
-      <Group visibleFrom="sm">
+      <Group visibleFrom="sm" gap="lg">
         <Text
           style={{ cursor: "pointer" }}
           onClick={() => router.push("/dashboard")}
