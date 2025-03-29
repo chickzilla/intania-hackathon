@@ -80,7 +80,8 @@ const CoursePage = () => {
 
   const filteredCourses = courses.filter((course) => {
     if (activeTab === "All") return true;
-    if (activeTab === "Enrolled") return course.progress < 100;
+    if (activeTab === "Enrolled")
+      return course.progress < 100 && course.progress != 0;
     if (activeTab === "Completed") return course.progress === 100;
     if (activeTab === "Recommended") return course.avgRating > 4.8;
     return true;
