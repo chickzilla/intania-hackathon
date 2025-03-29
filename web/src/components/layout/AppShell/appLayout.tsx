@@ -1,18 +1,8 @@
 "use client";
-import {
-  AppShell,
-  Group,
-  Burger,
-  Title,
-  Anchor,
-  Avatar,
-  ActionIcon,
-  useComputedColorScheme,
-  Box,
-} from "@mantine/core";
+import { AppShell, useComputedColorScheme, Box } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import ThemeToggle from "../../ui/actionIcons/themeToggle";
-import { IconBell } from "@tabler/icons-react";
+
+import AuthenticatedHeader from "../Header/authenticatedHeader";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
@@ -29,33 +19,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         padding="md"
       >
         <AppShell.Header>
-          <Group h="100%" px="md" justify="space-between">
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
-            <Title>Scuola</Title>
-            <Group align="center">
-              <Group visibleFrom="sm">
-                <Anchor c={darkMode ? "gray" : "black"}>Dashboard</Anchor>
-                <Anchor c={darkMode ? "gray" : "black"}>Profile</Anchor>
-                <Anchor c={darkMode ? "gray" : "black"}>Courses</Anchor>
-                <Anchor c={darkMode ? "gray" : "black"}>Competitions</Anchor>
-              </Group>
-            </Group>
-            <Group>
-              <ActionIcon variant="default">
-                <IconBell
-                  style={{ width: "70%", height: "70%" }}
-                  stroke={1.5}
-                />
-              </ActionIcon>
-              <ThemeToggle />
-              <Avatar color="cyan" name="John doe" radius="xl" />
-            </Group>
-          </Group>
+          <AuthenticatedHeader />
         </AppShell.Header>
 
         <AppShell.Navbar py="md" px={4}>

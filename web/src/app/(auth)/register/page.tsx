@@ -1,4 +1,3 @@
-import LoginForm from "@/components/shared/auth/loginForm";
 import RegisterForm from "@/components/shared/auth/registerForm";
 import { Paper } from "@mantine/core";
 
