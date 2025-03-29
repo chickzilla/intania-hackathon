@@ -16,6 +16,8 @@ import {
   Box,
   ActionIcon,
   Divider,
+  useComputedColorScheme,
+  ThemeIcon,
 } from "@mantine/core";
 import {
   IconBrandGithub,
@@ -30,7 +32,7 @@ import { useState } from "react";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("Stats");
-
+  const darkMode = useComputedColorScheme() === "dark";
   return (
     <Stack>
       <Paper bg="red.8" radius="md" p="xl">
@@ -96,7 +98,7 @@ const ProfilePage = () => {
                   <Text c="gray">Your learning statistics</Text>
                   <Grid my="lg" gutter="xs">
                     <GridCol span={{ base: 12, md: 4 }}>
-                      <Paper bg="gray.1" p="lg">
+                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">
@@ -112,7 +114,7 @@ const ProfilePage = () => {
                       </Paper>
                     </GridCol>
                     <GridCol span={{ base: 12, xs: 6, md: 4 }}>
-                      <Paper bg="gray.1" p="lg">
+                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">
@@ -128,7 +130,7 @@ const ProfilePage = () => {
                       </Paper>
                     </GridCol>
                     <GridCol span={{ base: 12, xs: 6, md: 4 }}>
-                      <Paper bg="gray.1" p="lg">
+                      <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg">
                         <Stack gap={0}>
                           <Center>
                             <Text size="2rem" fw={700} c="red.8">
@@ -231,45 +233,25 @@ const ProfilePage = () => {
                 </Stack>
                 <Divider />
                 <Group>
-                  <ActionIcon
-                    variant="default"
-                    size="lg"
-                    radius="xl"
-                    aria-label="Settings"
-                  >
+                  <ActionIcon variant="default" size="lg" radius="xl">
                     <IconBrandGithub
                       style={{ width: "70%", height: "70%" }}
                       stroke={1.5}
                     />
                   </ActionIcon>
-                  <ActionIcon
-                    variant="default"
-                    size="lg"
-                    radius="xl"
-                    aria-label="Settings"
-                  >
+                  <ActionIcon variant="default" size="lg" radius="xl">
                     <IconBrandLinkedin
                       style={{ width: "70%", height: "70%" }}
                       stroke={1.5}
                     />
                   </ActionIcon>
-                  <ActionIcon
-                    variant="default"
-                    size="lg"
-                    radius="xl"
-                    aria-label="Settings"
-                  >
+                  <ActionIcon variant="default" size="lg" radius="xl">
                     <IconBrandX
                       style={{ width: "70%", height: "70%" }}
                       stroke={1.5}
                     />
                   </ActionIcon>
-                  <ActionIcon
-                    variant="default"
-                    size="lg"
-                    radius="xl"
-                    aria-label="Settings"
-                  >
+                  <ActionIcon variant="default" size="lg" radius="xl">
                     <IconWorld
                       style={{ width: "70%", height: "70%" }}
                       stroke={1.5}
@@ -283,6 +265,70 @@ const ProfilePage = () => {
                 Leaderboard
               </Text>
               <Text c="gray">Your ranking</Text>
+              <Paper bg={darkMode ? "dark.6" : "gray.1"} p="lg" my="sm">
+                <Stack gap={0}>
+                  <Center>
+                    <Text size="2rem" fw={700} c="red.8">
+                      #42
+                    </Text>
+                  </Center>
+                  <Center>
+                    <Text c="gray" size="sm">
+                      Global Rank
+                    </Text>
+                  </Center>
+                </Stack>
+              </Paper>
+              <Stack gap="xs">
+                <Paper p="sm" radius="lg" withBorder>
+                  <Group justify="space-between" w="100%">
+                    <Group>
+                      <ThemeIcon
+                        variant="default"
+                        size="lg"
+                        radius="xl"
+                        bg="red.8"
+                      >
+                        41
+                      </ThemeIcon>
+                      <Text>Sarah Johnson</Text>
+                    </Group>
+                    <Text>1,260 EXP</Text>
+                  </Group>
+                </Paper>
+                <Paper p="sm" radius="lg" withBorder>
+                  <Group justify="space-between" w="100%">
+                    <Group>
+                      <ThemeIcon
+                        variant="default"
+                        size="lg"
+                        radius="xl"
+                        bg="red.8"
+                      >
+                        42
+                      </ThemeIcon>
+                      <Text>You</Text>
+                    </Group>
+                    <Text>1,240 EXP</Text>
+                  </Group>
+                </Paper>
+                <Paper p="sm" radius="lg" withBorder>
+                  <Group justify="space-between" w="100%">
+                    <Group>
+                      <ThemeIcon
+                        variant="default"
+                        size="lg"
+                        radius="xl"
+                        bg="red.8"
+                      >
+                        43
+                      </ThemeIcon>
+                      <Text>Mike Chen</Text>
+                    </Group>
+                    <Text>1,235 EXP</Text>
+                  </Group>
+                </Paper>
+              </Stack>
             </Paper>
           </Stack>
         </GridCol>
