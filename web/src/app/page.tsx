@@ -1,12 +1,19 @@
+"use client";
 import LandingLayout from "@/components/layout/AppShell/landingLayout";
+import CommentCard from "@/components/ui/commentCard";
 import {
+  Box,
   Button,
   Center,
+  Container,
+  Divider,
   Grid,
   GridCol,
   Group,
   Paper,
   Stack,
+  Stepper,
+  StepperStep,
   Text,
   ThemeIcon,
   Title,
@@ -14,19 +21,32 @@ import {
 import {
   IconArrowRight,
   IconBook,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconBrandX,
   IconCertificate2,
   IconCheck,
+  IconCircleCheck,
   IconCode,
   IconDeviceGamepad,
+  IconDeviceGamepad2,
   IconTrophy,
   IconUsers,
 } from "@tabler/icons-react";
+import { useState } from "react";
 
 export default function Home() {
+  const [active, setActive] = useState(1);
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
+
   return (
     <LandingLayout>
       <main>
-        <section>
+        <Container fluid>
           <Grid>
             <GridCol h="95vh" span={{ base: 12, md: 6 }}>
               <Stack h="100%" align="stretch" justify="center" gap="md">
@@ -74,14 +94,16 @@ export default function Home() {
               </Stack>
             </GridCol>
             <GridCol span={{ base: 12, md: 6 }}>
-              <img
-                src="/placeholder.svg?height=600&width=800"
+              {/* <img
+                src="/landing_image.webp"
                 alt="Scuola Platform"
-              />
+                width="100%"
+                height="100%"
+              /> */}
             </GridCol>
           </Grid>
-        </section>
-        <section>
+        </Container>
+        <Container fluid>
           <Stack>
             <Center>
               <Title>Platform Features</Title>
@@ -217,7 +239,173 @@ export default function Home() {
               </GridCol>
             </Grid>
           </Stack>
-        </section>
+        </Container>
+        <Container fluid mt="10rem">
+          <Stack>
+            <Center>
+              <Title>How It Works</Title>
+            </Center>
+            <Center>
+              <Text c="gray">
+                Start your learning journey in just a few simple steps
+              </Text>
+            </Center>
+          </Stack>
+          <Stepper
+            active={active}
+            onStepClick={setActive}
+            completedIcon={<IconCircleCheck size={35} />}
+            iconSize={100}
+            my="5rem"
+            color="red"
+          >
+            <StepperStep label="Step 1" description="Create account" />
+            <StepperStep label="Step 2" description="Explore Courses" />
+            <StepperStep
+              label="Step 3"
+              description="Learn & Practices"
+            ></StepperStep>
+            <StepperStep
+              label="Step 4"
+              description="Compete & Earn"
+            ></StepperStep>
+          </Stepper>
+        </Container>
+        <Container fluid mt="10rem">
+          <Center>
+            <Title>What Our Users Say</Title>
+          </Center>
+          <Center>
+            <Text c="gray">
+              Hear from students who have transformed their learning experience
+              with Scuola
+            </Text>
+          </Center>
+          <Grid gutter="xl" my="5rem">
+            <GridCol span={{ base: 12, md: 4 }}>
+              <CommentCard
+                name="Sarah Johnson"
+                role="Web Developer"
+                comment="Scuola transformed how I learn programming. The gamification elements kept me motivated, and the competitions helped me apply my skills in real-world scenarios. I landed my dream job thanks to the portfolio I built here!"
+              />
+            </GridCol>
+            <GridCol span={{ base: 12, md: 4 }}>
+              <CommentCard
+                name="Michael Chen"
+                role="Data Scientist"
+                comment="The competitive aspect of Scuola is what sets it apart. Participating in data science challenges pushed me to improve my skills rapidly. The community is incredibly supportive and the learning resources are top-notch."
+              />
+            </GridCol>
+            <GridCol span={{ base: 12, md: 4 }}>
+              <CommentCard
+                name="Emily Rodriguez"
+                role="UX Designer"
+                comment="As someone who learns by doing, Scuola's project-based approach was perfect for me. The feedback from instructors and peers helped me improve my design skills, and the badges I earned gave me a sense of accomplishment."
+              />
+            </GridCol>
+          </Grid>
+        </Container>
+        <Container fluid mt="10rem">
+          <Paper bg="red.8" py="5rem" mx="10rem" radius="lg">
+            <Stack>
+              <Center>
+                <Title c="white">Ready to Start Your Learning Journey?</Title>
+              </Center>
+              <Center>
+                <Text c="white" size="xl">
+                  Join thousands of learners who are mastering new skills,
+                  competing in challenges, and advancing their careers with
+                  Scuola.
+                </Text>
+              </Center>
+              <Center>
+                <Button
+                  rightSection={<IconArrowRight />}
+                  size="md"
+                  variant="white"
+                  color="red.8"
+                >
+                  Get Started Now
+                </Button>
+              </Center>
+            </Stack>
+          </Paper>
+        </Container>
+        <Divider my="5rem" />
+        <Container fluid>
+          <Grid mx="10rem">
+            <GridCol span={{ base: 12, md: 3 }}>
+              <Stack gap="xs">
+                <Group gap="xs">
+                  <IconDeviceGamepad2 color="red" />
+                  <Text fw={900} size="xl">
+                    Scuola
+                  </Text>
+                </Group>
+                <Text c="gray">
+                  The ultimate educational gaming platform that transforms how
+                  you learn and compete.
+                </Text>
+                <Group gap="xs" c="gray">
+                  <IconBrandFacebook />
+                  <IconBrandX />
+                  <IconBrandInstagram />
+                  <IconBrandLinkedin />
+                </Group>
+              </Stack>
+            </GridCol>
+            <GridCol span={{ base: 12, md: 3 }}>
+              <Stack gap="xs">
+                <Text fw={700} size="lg">
+                  Platform
+                </Text>
+                <Stack c="gray" gap="5">
+                  <Text>Courses</Text>
+                  <Text>Competitions</Text>
+                  <Text>Leaderboard</Text>
+                  <Text>Community</Text>
+                  <Text>Partnerships</Text>
+                </Stack>
+              </Stack>
+            </GridCol>
+            <GridCol span={{ base: 12, md: 3 }}>
+              <Stack gap="xs">
+                <Text fw={700} size="lg">
+                  Company
+                </Text>
+                <Stack c="gray" gap="5">
+                  <Text>About Us</Text>
+                  <Text>Careers</Text>
+                  <Text>Blog</Text>
+                  <Text>Press</Text>
+                  <Text>Contact</Text>
+                </Stack>
+              </Stack>
+            </GridCol>
+            <GridCol span={{ base: 12, md: 3 }}>
+              <Stack gap="xs">
+                <Text fw={700} size="lg">
+                  Legal
+                </Text>
+                <Stack c="gray" gap="5">
+                  <Text>Term of Services</Text>
+                  <Text>Privacy Policy</Text>
+                  <Text>Cookie Policy</Text>
+                  <Text>GDPR</Text>
+                  <Text>Accessibility</Text>
+                </Stack>
+              </Stack>
+            </GridCol>
+          </Grid>
+        </Container>
+        <Divider mt="5rem" />
+        <Container fluid mt="2rem">
+          <Center>
+            <Text c="gray" size="sm">
+              © 2025 Scuola. All rights reserved.
+            </Text>
+          </Center>
+        </Container>
       </main>
     </LandingLayout>
   );

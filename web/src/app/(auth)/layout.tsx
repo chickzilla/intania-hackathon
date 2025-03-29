@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Center } from "@mantine/core";
+import ThemeToggle from "@/components/ui/actionIcons/themeToggle";
+import { Box, Button, Center } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
@@ -26,6 +27,10 @@ export default function AuthLayout({
       >
         Back to Home
       </Button>
+
+      <Box pos="absolute" top={16} right={16}>
+        <ThemeToggle />
+      </Box>
       <Center h="100vh" w="100vw" bg="red.8">
         {children}
       </Center>
