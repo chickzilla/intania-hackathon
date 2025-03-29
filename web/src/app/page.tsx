@@ -2,7 +2,6 @@
 import LandingLayout from "@/components/layout/AppShell/landingLayout";
 import CommentCard from "@/components/ui/commentCard";
 import {
-  Box,
   Button,
   Center,
   Container,
@@ -35,14 +34,13 @@ import {
   IconTrophy,
   IconUsers,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
   const [active, setActive] = useState(1);
-  const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
+  const router = useRouter();
+
   const section1 = useScrollIntoView({ duration: 800, offset: 150 });
   const section2 = useScrollIntoView({ duration: 800, offset: 150 });
   const section3 = useScrollIntoView({ duration: 800, offset: 150 });
@@ -74,10 +72,16 @@ export default function Home() {
                   <Button
                     color="red.8"
                     rightSection={<IconArrowRight size={14} />}
+                    onClick={() => router.push("/register")}
                   >
                     Start Learning Now
                   </Button>
-                  <Button variant="default">Explore Features</Button>
+                  <Button
+                    variant="default"
+                    onClick={() => router.push("/login")}
+                  >
+                    Explore Features
+                  </Button>
                 </Group>
                 <Group>
                   <Center inline>
@@ -332,6 +336,7 @@ export default function Home() {
                   size="md"
                   variant="white"
                   color="red.8"
+                  onClick={() => router.push("/register")}
                 >
                   Get Started Now
                 </Button>
