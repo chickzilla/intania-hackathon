@@ -90,4 +90,6 @@ func ConfigRouters(server *gin.Engine) {
 		middleware.AuthMiddleware(),
 		handler.Reward.Claim)
 
+	videoGroup := server.Group("/video")
+	videoGroup.POST("/upload", handler.Video.UploadVideo)
 }
