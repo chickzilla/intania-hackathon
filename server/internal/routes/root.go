@@ -49,11 +49,14 @@ func ConfigRouters(server *gin.Engine) {
 	server.POST("/add-user", handler.User.AddUser) // register?
 	server.GET("/find-all-user", handler.User.FindAllUser)
 
-	//contest
+	// contest
 	contestGroup := server.Group("/contest")
 	contestGroup.Use(middleware.AuthMiddleware())
-	contestGroup.POST("/create",
-		middleware.RequireRoles("LECTURER"),
-		handler.Contest.AddContest)
+	contestGroup.POST("/create", handler.Contest.AddContest)
+	// middleware.RequireRoles("LECTURER"),
 
+	// participant
+	participantGroup := server.Group("/participant")
+	participantGroup.Use(middleware.AuthMiddleware())
+	participantGroup.POST("/join", handler.Participant.JoinContest)
 }
