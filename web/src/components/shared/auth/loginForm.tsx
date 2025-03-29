@@ -26,6 +26,7 @@ const LoginForm = () => {
           .then((res) => {
             window.sessionStorage.setItem("jwt_token", res.token);
             window.sessionStorage.setItem("id", res.id);
+            window.sessionStorage.setItem("role", res.role);
             notifications.show({
               title: "Login successful",
               message: "You have successfully logged in",
