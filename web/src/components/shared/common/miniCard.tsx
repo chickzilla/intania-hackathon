@@ -1,4 +1,4 @@
-import { formatDate } from "@/app/functions/dateFormat";
+import { formatDate } from "@/functions/dateFormat";
 import { COURSE_STATUS } from "@/enum/course/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
