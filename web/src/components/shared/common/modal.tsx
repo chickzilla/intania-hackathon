@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 import CourseModuleContent from "../courses/cousrseModuleContent";
 import { COMPETITION_LEVEL } from "@/enum/competitions/competitionStatus";
+import CompetitionModuleContent from "../competitions/competitionModuleContent";
 
 type CardProps = {
     courseData?: CourseDetails;
@@ -111,8 +112,7 @@ export default function ModalComponent(props: CardProps) {
                             </Badge>
                         </Group>
                         <Divider my="xs" />
-                        {/* TODO: Add CompetitionModuleContent */}
-                        {/* <CourseModuleContent {...course} /> */}
+                        <CompetitionModuleContent {...competition} />
                         <Group justify="flex-end">
                             <Button onClick={close}>Close</Button>
                         </Group>
