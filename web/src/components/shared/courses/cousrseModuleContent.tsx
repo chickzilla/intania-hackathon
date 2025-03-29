@@ -22,10 +22,20 @@ export default function CourseModuleContent(detail: CourseDetails) {
     const [selectedCourse, setSelectedCourse] = useState<CourseDetails>({
         ...detail,
         isEnrolled: false,
+        isCompleted: false,
     });
 
-    const handleEnroll = () => {
+    // TODO: Modify handle functions
+    const handleEnroll = (e: string) => {
+        console.log("Clicked Enroll!", e);
         setSelectedCourse((prev) => ({ ...prev, isEnrolled: true }));
+        console.log(selectedCourse.isEnrolled);
+    };
+
+    const handleComplete = (e: string) => {
+        console.log("Clicked Complete!", e);
+        setSelectedCourse((prev) => ({ ...prev, isCompleted: true }));
+        console.log(selectedCourse.isCompleted);
     };
     return (
         <Grid gutter="xl" mt="md" ml="sm">
@@ -86,7 +96,11 @@ export default function CourseModuleContent(detail: CourseDetails) {
                 }}
             >
                 <Box style={{ width: "full" }}>
-                    <MiniCard courseData={detail} />
+                    <MiniCard
+                        courseData={detail}
+                        onEnroll={handleEnroll}
+                        onComplete={handleComplete}
+                    />
                 </Box>
             </GridCol>
         </Grid>

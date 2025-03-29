@@ -6,15 +6,12 @@ import { IconAward } from "@tabler/icons-react";
 type CardProps = {
     courseData?: CourseDetails;
     competitionData?: CompetitionsDetails;
+    onEnroll: (e: string) => void;
+    onComplete: (e: string) => void;
 };
 
 export default function MiniCard(props: CardProps) {
     const course = props.courseData;
-    // TODO: Handle Enroll
-    const enrollHandle = () => {
-        console.log("Enroll Course Success!");
-    };
-
     const competition = props.competitionData;
     return (
         <>
@@ -62,11 +59,25 @@ export default function MiniCard(props: CardProps) {
                         </Stack>
                     </Card>
                     {!course.isEnrolled && !course.isCompleted ? (
-                        <Button fullWidth mt="md" radius="md">
+                        <Button
+                            fullWidth
+                            mt="md"
+                            radius="md"
+                            onClick={() => {
+                                props.onEnroll(course.id);
+                            }}
+                        >
                             Enroll Now
                         </Button>
                     ) : !course.isCompleted ? (
-                        <Button fullWidth mt="md" radius="md">
+                        <Button
+                            fullWidth
+                            mt="md"
+                            radius="md"
+                            onClick={() => {
+                                props.onComplete(course.id);
+                            }}
+                        >
                             Complete Course
                         </Button>
                     ) : (
