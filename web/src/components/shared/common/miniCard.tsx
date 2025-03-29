@@ -1,4 +1,5 @@
 import { formatDate } from "@/app/functions/dateFormat";
+import { COURSE_STATUS } from "@/enum/cousres/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
 import { Card, Image, Text, Stack, Group, Badge, Button } from "@mantine/core";
@@ -60,7 +61,7 @@ export default function MiniCard(props: CardProps) {
                             ))}
                         </Stack>
                     </Card>
-                    {!course.isEnrolled ? (
+                    {course.status === COURSE_STATUS.AVAILABLE ? (
                         <Button
                             fullWidth
                             mt="md"
@@ -71,7 +72,7 @@ export default function MiniCard(props: CardProps) {
                         >
                             Enroll Now
                         </Button>
-                    ) : !course.isCompleted ? (
+                    ) : course.status === COURSE_STATUS.ENROLLED ? (
                         <Button
                             fullWidth
                             mt="md"

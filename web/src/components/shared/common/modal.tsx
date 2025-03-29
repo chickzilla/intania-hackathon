@@ -20,6 +20,7 @@ type CardProps = {
     courseData?: CourseDetails;
     competitionData?: CompetitionsDetails;
     opened: boolean;
+    onComplete?: (n: number) => void;
     close: () => void;
 };
 
@@ -68,7 +69,7 @@ export default function ModalComponent(props: CardProps) {
                             </Badge>
                         </Group>
                         <Divider my="xs" />
-                        <CourseModuleContent {...course} />
+                        <CourseModuleContent detail={course} onComplete={props.onComplete} />
                         <Group justify="flex-end">
                             <Button onClick={close}>Close</Button>
                         </Group>

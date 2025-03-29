@@ -12,6 +12,7 @@ import CardDetail from "../common/cardDetail";
 
 type CardProps = {
     course: CourseDetails;
+    onComplete?: (n: number) => void;
 };
 
 export default function CourseCard(props: CardProps) {
@@ -47,7 +48,7 @@ export default function CourseCard(props: CardProps) {
                 {course.description}
             </Text>
 
-            <CardDetail courseData={course}></CardDetail>
+            <CardDetail courseData={course} onComplete={props.onComplete}></CardDetail>
         </MTCard>
     );
 }

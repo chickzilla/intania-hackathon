@@ -19,18 +19,21 @@ import {
     IconSearch,
     IconSettings,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = HeaderProps;
 
 export default function Header(props: Props) {
-    const { title, description, tabs, onSearch, onSearchByTab } = props;
+    const { title, description, tabs, onSearch, onSearchByTab, currentTab } =
+        props;
 
     const computedColorScheme = useComputedColorScheme();
     const darkMode = computedColorScheme !== "light";
 
     const [value, setValue] = useState<string>("");
-    const activeTab = tabs ? tabs[0].toLowerCase() : "";
+    const [activeTab, setActiveTab] = useState<string>(
+        tabs ? tabs[0].toLowerCase() : ""
+    );
     // TODO: Correct Handlers
     const handleSearch = () => {
         if (value.trim()) {
@@ -38,6 +41,12 @@ export default function Header(props: Props) {
             setValue("");
         }
     };
+
+    useEffect(() => {
+        if (currentTab) {
+            setActiveTab(currentTab);
+        }
+    }, [currentTab]);
 
     return (
         <Stack mx="xl" mt="xl">
@@ -87,7 +96,15 @@ export default function Header(props: Props) {
                     borderRadius: "12px",
                 }}
             >
-                <Tabs variant="pills" defaultValue={activeTab}>
+                <Tabs
+                    variant="pills"
+                    value={activeTab}
+                    onChange={(tab) => {
+                        if (!tab) return;
+                        setActiveTab(tab);
+                        onSearchByTab(tab);
+                    }}
+                >
                     <Tabs.List grow>
                         {tabs?.map((tab) => (
                             <Tabs.Tab

@@ -1,4 +1,5 @@
 export enum COURSE_STATUS {
+    AVAILABLE = "available",
     ENROLLED = "enrolled",
     COMPLETED = "completed",
 }

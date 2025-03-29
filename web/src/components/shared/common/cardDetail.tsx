@@ -26,6 +26,7 @@ import ModalComponent from "./modal";
 type CardProps = {
     courseData?: CourseDetails;
     competitionData?: CompetitionsDetails;
+    onComplete?: (n: number) => void;
 };
 
 export default function CardDetail(props: CardProps) {
@@ -36,6 +37,7 @@ export default function CardDetail(props: CardProps) {
                 {...props}
                 opened={opened}
                 close={close}
+                onComplete={props.onComplete}
             ></ModalComponent>
             <Button onClick={open} fullWidth mt="md" radius="md">
                 View Details

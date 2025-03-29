@@ -9,6 +9,7 @@ import { COURSE_LEVEL, COURSE_STATUS } from "@/enum/cousres/courseStatus";
 import { CompetitionsList } from "@/interfaces/listCompetitions";
 import { CoursesList } from "@/interfaces/listCouses";
 import { Stack } from "@mantine/core";
+import { count } from "console";
 import { on } from "events";
 import { title } from "process";
 import { useEffect, useState } from "react";
@@ -31,6 +32,12 @@ export default function CoursesPage() {
         setSearch("");
     };
 
+    const handleComplete = (point: number) => {
+        console.log("Clicked Complete!");
+        console.log("You receive", point);
+        setActiveTab("completed");
+    };
+
     const headerParams = {
         title: CoursesHeader.title,
         description: CoursesHeader.description,
@@ -42,13 +49,18 @@ export default function CoursesPage() {
     useEffect(() => {
         let filtered = mockList.courses;
 
-        if (activeTab === "enrolled" || activeTab === "completed") {
+        if (activeTab === "enrolled") {
             filtered = filtered.filter(
-                (course) =>
-                    course.status.toLowerCase() === activeTab.toLowerCase()
+                (course) => course.status === COURSE_STATUS.ENROLLED
+            );
+        } else if (activeTab === "completed") {
+            filtered = filtered.filter(
+                (course) => course.status === COURSE_STATUS.COMPLETED
             );
         } else if (activeTab === "available") {
-            filtered = filtered.filter((course) => !course.isEnrolled);
+            filtered = filtered.filter(
+                (course) => course.status === COURSE_STATUS.AVAILABLE
+            );
         }
 
         if (search.trim()) {
@@ -82,15 +94,13 @@ export default function CoursesPage() {
                 level: COURSE_LEVEL.BEGINNER,
                 startDate: new Date(),
                 endDate: new Date(),
-                status: COURSE_STATUS.ENROLLED,
+                status: COURSE_STATUS.AVAILABLE,
                 point: 100,
                 achievements: [
                     COURSE_ACHIEVEMENT.PYTHON,
                     COURSE_ACHIEVEMENT.JS,
                     COURSE_ACHIEVEMENT.REACT,
                 ],
-                isEnrolled: false,
-                isCompleted: false,
             },
             {
                 id: "2",
@@ -128,8 +138,6 @@ export default function CoursesPage() {
                 status: COURSE_STATUS.COMPLETED,
                 point: 200,
                 achievements: [COURSE_ACHIEVEMENT.HTML, COURSE_ACHIEVEMENT.CSS],
-                isEnrolled: true,
-                isCompleted: false,
             },
             {
                 id: "3",
@@ -152,8 +160,6 @@ export default function CoursesPage() {
                 status: COURSE_STATUS.ENROLLED,
                 point: 300,
                 achievements: [COURSE_ACHIEVEMENT.JAVA],
-                isEnrolled: true,
-                isCompleted: true,
             },
         ],
     };
@@ -165,8 +171,12 @@ export default function CoursesPage() {
                 tabs={headerParams.tabs}
                 onSearch={headerParams.onSearch}
                 onSearchByTab={headerParams.onSearchByTab}
+                currentTab={activeTab}
             ></Header>
-            <ListCard coursesData={filteredCourses}></ListCard>
+            <ListCard
+                coursesData={filteredCourses}
+                onComplete={handleComplete}
+            ></ListCard>
         </Stack>
     );
 }

@@ -23,6 +23,7 @@ import CompetitionCard from "../competitions/competitionCard";
 type CardProps = {
     courseData?: CourseDetails;
     competitionData?: CompetitionsDetails;
+    onComplete?: (n: number) => void;
 };
 type Props = CardProps;
 
@@ -33,7 +34,7 @@ export default function Card(props: Props) {
     return (
         <>
             {course ? (
-                <CourseCard course={course}></CourseCard>
+                <CourseCard course={course} onComplete={props.onComplete}></CourseCard>
             ) : competition ? (
                 <CompetitionCard competition={competition}></CompetitionCard>
             ) : (

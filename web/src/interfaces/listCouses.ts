@@ -22,8 +22,6 @@ export interface CourseDetails {
     status: COURSE_STATUS;
     point: number;
     achievements: COURSE_ACHIEVEMENT[];
-    isEnrolled: boolean;
-    isCompleted: boolean;
 }
 
 interface ModuleDetails {

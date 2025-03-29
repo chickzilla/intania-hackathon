@@ -5,4 +5,5 @@ export interface HeaderProps {
     onSearch: (query: string) => void;
     onSearchByTab: (tab: string) => void;
     tabs?: string[];
+    currentTab?: string;
 }
