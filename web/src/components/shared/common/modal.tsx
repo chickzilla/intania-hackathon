@@ -2,18 +2,21 @@ import { COURSE_LEVEL } from "@/enum/course/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
 import {
-  Modal,
-  ScrollArea,
-  Stack,
-  Group,
-  Badge,
-  Divider,
-  Text,
-  Center,
-  Button,
+    Modal,
+    ScrollArea,
+    Stack,
+    Group,
+    Badge,
+    Divider,
+    Text,
+    Center,
+    Button,
 } from "@mantine/core";
 import CourseModuleContent from "../courses/courseModuleContent";
-import { COMPETITION_LEVEL } from "@/enum/competitions/competitionStatus";
+import {
+    COMPETITION_LEVEL,
+    COMPETITION_STATUS,
+} from "@/enum/competitions/competitionStatus";
 import CompetitionModuleContent from "../competitions/competitionModuleContent";
 
 type CardProps = {
@@ -25,9 +28,10 @@ type CardProps = {
 };
 
 export default function ModalComponent(props: CardProps) {
-  const course = props.courseData;
-  const competition = props.competitionData;
-  const { opened, close } = props;
+    const isAdmin = sessionStorage.getItem("role") === "ADMIN";
+    const course = props.courseData;
+    const competition = props.competitionData;
+    const { opened, close } = props;
 
     return (
         //TODO: Add Close and ActionButton in each
@@ -69,7 +73,10 @@ export default function ModalComponent(props: CardProps) {
                             </Badge>
                         </Group>
                         <Divider my="xs" />
-                        <CourseModuleContent detail={course} onComplete={props.onComplete} />
+                        <CourseModuleContent
+                            detail={course}
+                            onComplete={props.onComplete}
+                        />
                         <Group justify="flex-end">
                             <Button onClick={close}>Close</Button>
                         </Group>
@@ -115,6 +122,22 @@ export default function ModalComponent(props: CardProps) {
                         <Divider my="xs" />
                         <CompetitionModuleContent {...competition} />
                         <Group justify="flex-end">
+                            {isAdmin &&
+                            !(
+                                competition.status ===
+                                COMPETITION_STATUS.FINISHED
+                            ) ? (
+                                <Button
+                                    onClick={() => {
+                                        // TODO: Add Action
+                                        console.log("Admin Action");
+                                    }}
+                                >
+                                    Complete Competition
+                                </Button>
+                            ) : (
+                                <></>
+                            )}
                             <Button onClick={close}>Close</Button>
                         </Group>
                     </Stack>
