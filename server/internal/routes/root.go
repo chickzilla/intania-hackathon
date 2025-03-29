@@ -27,10 +27,10 @@ func ConfigRouters(server *gin.Engine) {
 	courseGroup.POST("/create",
 		middleware.RequireRoles("LECTURER", "ADMIN"),
 		handler.Course.Create)
-
 	courseGroup.POST("/join",
-		middleware.AuthMiddleware(),
 		handler.Course.JoinCourse)
+	courseGroup.GET("/find-all",
+		handler.Course.FindAll)
 
 	// module
 	moduleGroup := server.Group("/module")

@@ -1,6 +1,7 @@
 package course
 
 import (
+	"fmt"
 	"hackathon/internal/models"
 
 	"github.com/gin-gonic/gin"
@@ -32,6 +33,7 @@ func (r *Resolver) Create(c *gin.Context) {
 		Created_by: idParsed,
 	}
 	if err := r.CourseRepo.AddOne(c, &newCourse); err != nil {
+		fmt.Println("error creating course:", err)
 		c.JSON(500, gin.H{"error": "could not create course"})
 		return
 	}
@@ -41,6 +43,7 @@ func (r *Resolver) Create(c *gin.Context) {
 		CourseID: newCourse.ID,
 	}
 	if err := r.UserCourseRepo.AddOne(c, &newUserCouse); err != nil {
+		fmt.Println("error creating user course:", err)
 		c.JSON(500, gin.H{"error": "could not create user course"})
 		return
 	}
