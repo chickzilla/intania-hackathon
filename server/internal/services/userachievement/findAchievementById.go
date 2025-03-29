@@ -21,8 +21,18 @@ func (r *Resolver) FindAchievementById(c *gin.Context) {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
+	var achievementIds []uuid.UUID
+	for _, element := range *model {
+		achievementIds = append(achievementIds, (element).AchievementID)
+	}
 
-	c.JSON(200, gin.H{"result": *model})
+	result, err := r.AchievementRepo.FindByIDs(c, achievementIds)
+
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+	}
+
+	c.JSON(200, gin.H{"result": result})
 	return
 
 }

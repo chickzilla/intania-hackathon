@@ -40,7 +40,7 @@ func (r *BaseRepo[T]) FindOneByID(ctx context.Context, id any) (*T, error) {
 	return &model, nil
 }
 
-func (r *BaseRepo[T]) FindByIDs(ctx context.Context, ids []any) ([]*T, error) {
+func (r *BaseRepo[T]) FindByIDs(ctx context.Context, ids []uuid.UUID) ([]*T, error) {
 	var models []*T
 	if err := r.DB.WithContext(ctx).Find(&models, ids).Error; err != nil {
 		return nil, err
