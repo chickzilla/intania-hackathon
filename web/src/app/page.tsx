@@ -2,7 +2,6 @@
 import LandingLayout from "@/components/layout/AppShell/landingLayout";
 import CommentCard from "@/components/ui/commentCard";
 import {
-  Box,
   Button,
   Center,
   Container,
@@ -18,6 +17,7 @@ import {
   ThemeIcon,
   Title,
 } from "@mantine/core";
+import { useScrollIntoView } from "@mantine/hooks";
 import {
   IconArrowRight,
   IconBook,
@@ -34,17 +34,23 @@ import {
   IconTrophy,
   IconUsers,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
   const [active, setActive] = useState(1);
-  const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
+  const router = useRouter();
+
+  const section1 = useScrollIntoView({ duration: 800, offset: 150 });
+  const section2 = useScrollIntoView({ duration: 800, offset: 150 });
+  const section3 = useScrollIntoView({ duration: 800, offset: 150 });
 
   return (
-    <LandingLayout>
+    <LandingLayout
+      scrollToSection1={section1.scrollIntoView}
+      scrollToSection2={section2.scrollIntoView}
+      scrollToSection3={section3.scrollIntoView}
+    >
       <main>
         <Container fluid>
           <Grid>
@@ -66,10 +72,16 @@ export default function Home() {
                   <Button
                     color="red.8"
                     rightSection={<IconArrowRight size={14} />}
+                    onClick={() => router.push("/register")}
                   >
                     Start Learning Now
                   </Button>
-                  <Button variant="default">Explore Features</Button>
+                  <Button
+                    variant="default"
+                    onClick={() => router.push("/login")}
+                  >
+                    Explore Features
+                  </Button>
                 </Group>
                 <Group>
                   <Center inline>
@@ -103,7 +115,7 @@ export default function Home() {
             </GridCol>
           </Grid>
         </Container>
-        <Container fluid>
+        <Container fluid ref={section1.targetRef}>
           <Stack>
             <Center>
               <Title>Platform Features</Title>
@@ -240,7 +252,7 @@ export default function Home() {
             </Grid>
           </Stack>
         </Container>
-        <Container fluid mt="10rem">
+        <Container fluid mt="10rem" ref={section2.targetRef}>
           <Stack>
             <Center>
               <Title>How It Works</Title>
@@ -271,7 +283,7 @@ export default function Home() {
             ></StepperStep>
           </Stepper>
         </Container>
-        <Container fluid mt="10rem">
+        <Container fluid mt="10rem" ref={section3.targetRef}>
           <Center>
             <Title>What Our Users Say</Title>
           </Center>
@@ -324,6 +336,7 @@ export default function Home() {
                   size="md"
                   variant="white"
                   color="red.8"
+                  onClick={() => router.push("/register")}
                 >
                   Get Started Now
                 </Button>
