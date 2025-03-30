@@ -83,6 +83,19 @@ export default function MiniCard(props: CardProps) {
           });
           props.onRegister?.(competitionId);
           setIsFinished(true);
+          const oldPoints = window.sessionStorage.getItem("point") || "0";
+          const newPoints = parseInt(oldPoints) + competition?.point;
+
+          const oldRankPoint =
+            window.sessionStorage.getItem("rankingPoint") || "0";
+          const newRankPoint =
+            parseInt(oldRankPoint) + competition?.rankingPoint;
+
+          window.sessionStorage.setItem("point", newPoints.toString());
+          window.sessionStorage.setItem(
+            "rankingPoint",
+            newRankPoint.toString()
+          );
           window.location.reload();
         })
         .catch((error) => {
