@@ -161,6 +161,13 @@ const CoursePage = () => {
                         color: "red",
                       });
                     });
+
+                  const oldPoints =
+                    window.sessionStorage.getItem("point") || "0";
+                  const newPoints = parseInt(oldPoints) + 500;
+
+                  window.sessionStorage.setItem("point", newPoints.toString());
+
                   setCourses((prev) =>
                     prev.map((c, i) =>
                       i === courseIndex ? { ...c, isReceived: true } : c
