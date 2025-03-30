@@ -74,15 +74,48 @@ export default function LeaderBoard() {
         <ScrollArea h={400}>
           <Stack gap="xs">
             {users.map((user, index) => (
-              <Paper key={user.ID} p="sm" radius="lg" withBorder>
+              <Paper
+                key={user.ID}
+                p="sm"
+                radius="lg"
+                withBorder
+                bg={
+                  user.ID === sessionStorage.getItem("id") ? "red.1" : undefined
+                }
+                style={
+                  user.ID === sessionStorage.getItem("id")
+                    ? {
+                        border: "2px solid #fa5252",
+                        boxShadow: "0 0 10px rgba(250, 82, 82, 0.4)",
+                      }
+                    : {}
+                }
+              >
                 <Group justify="space-between" w="100%">
                   <Group>
-                    <ThemeIcon size="lg" radius="xl" bg="red.8" c="white">
+                    <ThemeIcon
+                      size="lg"
+                      radius="xl"
+                      bg={
+                        user.ID === sessionStorage.getItem("id")
+                          ? "red.8"
+                          : "red.6"
+                      }
+                      c="white"
+                    >
                       {index + 1}
                     </ThemeIcon>
-                    <Text>{user.FullName}</Text>
+                    <Text
+                      fw={user.ID === sessionStorage.getItem("id") ? 700 : 400}
+                    >
+                      {user.FullName}
+                    </Text>
                   </Group>
-                  <Text>{user.RankPoint.toLocaleString()} EXP</Text>
+                  <Text
+                    fw={user.ID === sessionStorage.getItem("id") ? 700 : 400}
+                  >
+                    {user.RankPoint.toLocaleString()} EXP
+                  </Text>
                 </Group>
               </Paper>
             ))}
