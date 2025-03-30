@@ -11,7 +11,7 @@ export default function RewardCard({ ...props }: RewardCardValues) {
             <Text size="xl" fw={700} mt="md">
                 {props.name}
             </Text>
-            <Text size="sm" c="dimmed">
+            <Text size="sm" c="dimmed" lineClamp={1}>
                 {props.detail}
             </Text>
             <Group gap="xs" mt="md" justify="flex-end">
