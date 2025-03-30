@@ -25,4 +25,5 @@ export interface CompetitionsDetails {
     point: number;
     rankingPoint: number;
     isRegistered: boolean;
+    isFinished: boolean;
 }

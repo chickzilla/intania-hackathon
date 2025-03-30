@@ -14,6 +14,7 @@ type FindByStatusRequest struct {
 type ContestWithIsRegistered struct {
 	models.Contests
 	IsRegistered bool `json:"isRegistered"`
+	IsFinished   bool `json:"isFinished"`
 }
 
 func (r *Resolver) FindByStatus(c *gin.Context) {
@@ -37,26 +38,33 @@ func (r *Resolver) FindByStatus(c *gin.Context) {
 		return
 	}
 
-	// Prepare map of registered contest IDs if user_id is provided
-	registeredContestIDs := map[uuid.UUID]bool{}
-
 	userContests, err := r.UserContestRepo.FindByUserID(c, idParsed)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
+	// Build maps for registered and finished contests
+	registeredContestIDs := map[uuid.UUID]bool{}
+	finishedContestIDs := map[uuid.UUID]bool{}
+
 	for _, uc := range userContests {
 		registeredContestIDs[uc.ContestID] = true
+		if uc.UserStatus == "FINISHED" {
+			finishedContestIDs[uc.ContestID] = true
+		}
 	}
 
-	// Transform to include isRegistered
+	// Compose response with both flags
 	var response []ContestWithIsRegistered
 	for _, contest := range contests {
 		_, isRegistered := registeredContestIDs[contest.ID]
+		_, isFinished := finishedContestIDs[contest.ID]
+
 		response = append(response, ContestWithIsRegistered{
 			Contests:     contest,
-			IsRegistered: isRegistered, // false if user not provided
+			IsRegistered: isRegistered,
+			IsFinished:   isFinished,
 		})
 	}
 

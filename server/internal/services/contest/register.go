@@ -1,8 +1,6 @@
 package contest
 
 import (
-	"hackathon/internal/models"
-
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -13,7 +11,6 @@ type JoinContestRequest struct {
 }
 
 func (r *Resolver) Register(c *gin.Context) {
-
 	var req JoinContestRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -27,17 +24,10 @@ func (r *Resolver) Register(c *gin.Context) {
 		return
 	}
 
-	newUserContest := models.UserContest{
-		UserID:     idParsed,
-		ContestID:  req.ContestID,
-		UserStatus: req.NewStatus,
-	}
-
-	if err := r.UserContestRepo.AddOne(c, &newUserContest); err != nil {
-		c.JSON(500, gin.H{"error": "could not register contest"})
+	if err := r.UserContestRepo.UpsertUserContest(c, idParsed, req.ContestID, req.NewStatus); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "successfully registered contest"})
-
+	c.JSON(200, gin.H{"message": "contest registration updated"})
 }

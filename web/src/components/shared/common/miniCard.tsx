@@ -83,6 +83,7 @@ export default function MiniCard(props: CardProps) {
           });
           props.onRegister?.(competitionId);
           setIsFinished(true);
+          window.location.reload();
         })
         .catch((error) => {
           notifications.show({
