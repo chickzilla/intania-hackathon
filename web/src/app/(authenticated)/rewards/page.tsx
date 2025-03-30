@@ -1,5 +1,6 @@
 "use client";
 import RewardCard from "@/components/shared/rewards/rewardCard";
+import getAllRewards from "@/services/reward/getAllRewards";
 import { RewardCardValues } from "@/types/reward";
 import {
     Stack,
@@ -14,8 +15,12 @@ import {
     Text,
 } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 import { IconSearch, IconFilter } from "@tabler/icons-react";
-import { useState } from "react";
+import { get } from "http";
+import { useEffect, useState } from "react";
+
+const token = sessionStorage.getItem("jwt_token") || "";
 
 export default function RewardsPage() {
     const [rewards, setRewards] = useState<RewardCardValues[]>([
@@ -47,6 +52,32 @@ export default function RewardsPage() {
             isClaimed: false,
         },
     ]);
+
+    useEffect(() => {
+        getAllRewards(token)
+            .then((res) => {
+                const rewards = res.map((reward: any) => {
+                    return {
+                        id: reward.ID,
+                        name: reward.Name,
+                        detail: reward.Detail,
+                        imageUrl: reward.ImageURL,
+                        point: reward.Point,
+                        isClaimed: reward.IsClaimed,
+                    };
+                });
+                setRewards(rewards);
+            })
+            .catch((err) => {
+                console.log(err);
+                notifications.show({
+                    title: "Something went wrong",
+                    message: err.message || "Fetch rewards failed",
+                    color: "red",
+                });
+            });
+    }, [token]);
+
     const [searchQuery, setSearchQuery] = useDebouncedState("", 200);
     const [activeTab, setActiveTab] = useState("Unclaimed");
 

@@ -15,6 +15,7 @@ type Reward struct {
 	Detail   string `gorm:"type:varchar(255)"`
 	ImageURL string `gorm:"type:varchar(255)"`
 	Point    int    `gorm:"type:int;not null"`
+	IsClaimed bool   `gorm:"type:boolean;default:false"`
 
 	CreatedAt time.Time `gorm:"type:timestamp;default:now()"`
 	UpdatedAt time.Time `gorm:"type:timestamp;default:now()"`

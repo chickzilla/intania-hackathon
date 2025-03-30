@@ -91,7 +91,6 @@ func ConfigRouters(server *gin.Engine) {
 	rewardGroup.GET("/find-all",
 		handler.Reward.FindAll)
 	rewardGroup.POST("/claim",
-		middleware.AuthMiddleware(),
 		handler.Reward.Claim)
 
 	// user reward
