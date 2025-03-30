@@ -106,12 +106,16 @@ export default function Home() {
               </Stack>
             </GridCol>
             <GridCol span={{ base: 12, md: 6 }}>
-              {/* <img
-                src="/landing_image.webp"
-                alt="Scuola Platform"
-                width="100%"
-                height="100%"
-              /> */}
+              <Center pt={"5rem"}>
+                <IconDeviceGamepad2
+                  style={{ width: "20rem", height: "20rem" }}
+                  stroke={1.5}
+                  color="#fa5252"
+                />
+              </Center>
+              <Text ml="xs" size="5rem" fw={700} ta={"center"}>
+                Scuola
+              </Text>
             </GridCol>
           </Grid>
         </Container>
