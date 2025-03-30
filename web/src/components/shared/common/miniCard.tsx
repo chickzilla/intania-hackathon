@@ -74,7 +74,7 @@ export default function MiniCard(props: CardProps) {
       return;
     }
     register(competitionId, "FINISHED", user_token).then(() => {
-      addPoint(0, user_token, competition?.point || 0)
+      addPoint(competition?.point, user_token, competition?.rankingPoint || 0)
         .then(() => {
           notifications.show({
             title: "Success",
