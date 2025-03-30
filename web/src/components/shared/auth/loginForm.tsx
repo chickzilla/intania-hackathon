@@ -33,6 +33,7 @@ const LoginForm = () => {
                             "rankingPoint",
                             res.rankingPoint
                         );
+                        window.sessionStorage.setItem("email", res.email);
                         notifications.show({
                             title: "Login successful",
                             message: "You have successfully logged in",

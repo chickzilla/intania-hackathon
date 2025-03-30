@@ -125,6 +125,7 @@ const AuthenticatedHeader = ({ opened, toggle }: AuthenticatedHeaderProps) => {
                                 window.sessionStorage.removeItem(
                                     "rankingPoint"
                                 );
+                                window.sessionStorage.removeItem("email");
                                 router.push("/login");
                             }}
                         >
