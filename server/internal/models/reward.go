@@ -14,7 +14,7 @@ type Reward struct {
 	Name     string `gorm:"type:varchar(50);not null"`
 	Detail   string `gorm:"type:varchar(255)"`
 	ImageURL string `gorm:"type:varchar(255)"`
-	Point   int    `gorm:"type:int;not null"`
+	Point    int    `gorm:"type:int;not null"`
 
 	CreatedAt time.Time `gorm:"type:timestamp;default:now()"`
 	UpdatedAt time.Time `gorm:"type:timestamp;default:now()"`
