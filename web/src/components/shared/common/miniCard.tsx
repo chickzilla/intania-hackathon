@@ -118,7 +118,7 @@ export default function MiniCard(props: CardProps) {
           <Card withBorder radius="md" p="md" w={250}>
             {/* TODO: Real Image */}
             <Image
-              src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
+              src="/img/scroll.jpg"
               height={120}
               radius="md"
               alt="Course Image"

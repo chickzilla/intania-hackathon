@@ -6,4 +6,5 @@ export type CourseCardValues = {
   progress: number;
   avgRating: number;
   amountRating: number;
+  isReceived?: boolean;
 };
