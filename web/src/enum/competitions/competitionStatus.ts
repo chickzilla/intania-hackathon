@@ -1,7 +1,7 @@
 export enum COMPETITION_STATUS {
-    UPCOMING = "upcoming",
-    ONGOING = "ongoing",
-    FINISHED = "finished",
+    UPCOMING = "UPCOMING",
+    ONGOING = "ONGOING",
+    FINISHED = "FINISHED",
 }
 
 export enum COMPETITION_LEVEL {

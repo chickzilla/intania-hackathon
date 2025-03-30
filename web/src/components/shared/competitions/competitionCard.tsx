@@ -20,7 +20,26 @@ type CardProps = {
 export default function CompetitionCard(props: CardProps) {
   const { competition } = props;
   return (
-    <MTCard shadow="sm" padding="lg" radius="md" withBorder>
+    <MTCard
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      style={{
+        opacity:
+          competition.isFinished ||
+          competition.status == "UPCOMING" ||
+          competition.status == "FINISHED"
+            ? 0.5
+            : 1,
+        pointerEvents:
+          competition.isFinished ||
+          competition.status == "UPCOMING" ||
+          competition.status == "FINISHED"
+            ? "none"
+            : "auto",
+      }}
+    >
       <MTCard.Section>
         <Image
           src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
@@ -28,6 +47,37 @@ export default function CompetitionCard(props: CardProps) {
           alt="mock Img"
         />
       </MTCard.Section>
+      {(competition.isFinished ||
+        competition.status === "UPCOMING" ||
+        competition.status === "FINISHED") && (
+        <Text
+          fw={700}
+          size="3rem"
+          c="white"
+          ta="center"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%) rotate(-15deg)",
+            opacity: 0.85,
+            zIndex: 2,
+            borderRadius: "8px",
+            padding: "1rem 2.5rem",
+            backgroundColor: competition.isFinished
+              ? "green"
+              : competition.status === "UPCOMING"
+              ? "orange"
+              : "gray",
+          }}
+        >
+          {competition.isFinished
+            ? "DONE"
+            : competition.status === "UPCOMING"
+            ? "COMING SOON"
+            : "FINISHED"}
+        </Text>
+      )}
 
       <Group justify="space-between" mt="md" mb="xs">
         <Text size="xl" fw={700}>
