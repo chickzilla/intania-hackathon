@@ -8,10 +8,18 @@ import (
 )
 
 type CreateContestRequest struct {
-	Name    string    `json:"name"`
-	Detail  string    `json:"detail"`
-	StartAt time.Time `json:"start_at"` //example of RFC3339 format : 2025-03-29T14:45:00Z
-	EndAt   time.Time `json:"end_at"`   //example of RFC3339 format : 2025-03-29T14:45:00Z
+	Title           string    `json:"title"`
+	Description     string    `json:"description"`
+	Details         string    `json:"details"`
+	Requirements    string    `json:"requirements"`
+	Rule            string    `json:"rule"`
+	JudgingCriteria string    `json:"judgingCriteria"`
+	Level           string    `json:"level"`
+	Status          string    `json:"status"`
+	Point           int       `json:"point"`
+	RankingPoint    int       `json:"rankingPoint"`
+	StartDate       time.Time `json:"startDate"`
+	EndDate         time.Time `json:"endDate"`
 }
 
 func (r *Resolver) AddContest(c *gin.Context) {
@@ -22,11 +30,26 @@ func (r *Resolver) AddContest(c *gin.Context) {
 		return
 	}
 
-	var model = models.Contests{
-		Name:    req.Name,
-		Detail:  req.Detail,
-		StartAt: req.StartAt,
-		EndAt:   req.EndAt,
+	/* organizerUUID, err := uuid.Parse(req.OrganizerID)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid organizer ID"})
+		return
+	} */
+
+	model := models.Contests{
+		Title:           req.Title,
+		Description:     req.Description,
+		Details:         req.Details,
+		Requirements:    req.Requirements,
+		Rule:            req.Rule,
+		JudgingCriteria: req.JudgingCriteria,
+		//OrganizerID:     organizerUUID,
+		Level:        req.Level,
+		Status:       req.Status,
+		Point:        req.Point,
+		RankingPoint: req.RankingPoint,
+		StartDate:    req.StartDate,
+		EndDate:      req.EndDate,
 	}
 
 	if err := r.ContestRepo.AddOne(c, &model); err != nil {
@@ -35,6 +58,6 @@ func (r *Resolver) AddContest(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"message": "success"})
-	return
-
 }
+
+//example of RFC3339 format : 2025-03-29T14:45:00Z

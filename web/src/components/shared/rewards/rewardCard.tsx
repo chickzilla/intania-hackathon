@@ -24,7 +24,7 @@ export default function RewardCard({ ...props }: RewardCardValues) {
                 const updatedPoint = Number(userPoint) - props.point;
                 sessionStorage.setItem("point", updatedPoint.toString());
 
-                addPoint(-props.point, token);
+                addPoint(-props.point, token, 0);
 
                 notifications.show({
                     title: "Claim successful",
