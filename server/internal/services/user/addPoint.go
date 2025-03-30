@@ -6,7 +6,8 @@ import (
 )
 
 type AddPointRequest struct {
-	Point int `json:"point" binding:"required"`
+	Point        int `json:"point"`
+	RankingPoint int `json:"ranking_point"`
 }
 
 func (r *Resolver) AddPoint(c *gin.Context) {
@@ -34,6 +35,7 @@ func (r *Resolver) AddPoint(c *gin.Context) {
 	}
 
 	user.Point += int64(req.Point)
+	user.RankPoint += int64(req.RankingPoint)
 
 	// Save back to DB
 	if err := r.UserRepo.UpdateOne(c, user); err != nil {

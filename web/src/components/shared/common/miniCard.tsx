@@ -1,9 +1,14 @@
+"use client";
 import { formatDate } from "@/functions/dateFormat";
 import { COURSE_STATUS } from "@/enum/course/courseStatus";
 import { CompetitionsDetails } from "@/interfaces/listCompetitions";
 import { CourseDetails } from "@/interfaces/listCouses";
 import { Card, Image, Text, Stack, Group, Badge, Button } from "@mantine/core";
 import { IconAward } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { notifications } from "@mantine/notifications";
+import register from "@/services/contest/register";
+import addPoint from "@/services/user/addPoint";
 
 type CardProps = {
   courseData?: CourseDetails;
@@ -17,6 +22,81 @@ export default function MiniCard(props: CardProps) {
   const currentDate = new Date().toISOString();
   const course = props.courseData;
   const competition = props.competitionData;
+  const [isFetching, setIsFetching] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+
+  const handleRegister = async () => {
+    setIsFetching(true);
+    const user_token = sessionStorage.getItem("jwt_token");
+    const competitionId = competition?.id;
+    if (!user_token || !competitionId) {
+      notifications.show({
+        title: "Error",
+        message: "Please login to register for the competition.",
+        color: "red",
+      });
+      return;
+    }
+
+    register(competitionId, "REGISTERED", user_token)
+      .then(() => {
+        notifications.show({
+          title: "Success",
+          message: "Successfully registered for the competition.",
+          color: "green",
+        });
+        props.onRegister?.(competitionId);
+        setIsRegistered(true);
+      })
+      .catch((error) => {
+        notifications.show({
+          title: "Error",
+          message: error.message || "Failed to register for the competition.",
+          color: "red",
+        });
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  };
+
+  const handleFinish = async () => {
+    setIsFetching(true);
+    const user_token = sessionStorage.getItem("jwt_token");
+    const competitionId = competition?.id;
+    if (!user_token || !competitionId) {
+      notifications.show({
+        title: "Error",
+        message: "Please login to finish the competition.",
+        color: "red",
+      });
+      return;
+    }
+    register(competitionId, "FINISHED", user_token).then(() => {
+      addPoint(0, user_token, competition?.point || 0)
+        .then(() => {
+          notifications.show({
+            title: "Success",
+            message: "Successfully finished the competition.",
+            color: "green",
+          });
+          props.onRegister?.(competitionId);
+          setIsFinished(true);
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.message || "Failed to finish the competition.",
+            color: "red",
+          });
+        })
+        .finally(() => {
+          setIsFetching(false);
+        });
+    });
+  };
+
   return (
     <>
       {course ? (
@@ -142,20 +222,37 @@ export default function MiniCard(props: CardProps) {
               </Group>
             </Stack>
           </Card>
-          {currentDate > competition.endDate ? (
-            <></>
-          ) : (
-            <Button
-              fullWidth
-              mt="md"
-              radius="md"
-              onClick={() => {
-                // register
-              }}
-              disabled={competition.isRegistered}
-            >
-              {!competition.isRegistered ? "Register Now" : "Registered"}
-            </Button>
+          {currentDate > competition.endDate ? null : (
+            <>
+              {!competition.isRegistered && !isRegistered ? (
+                <Button
+                  fullWidth
+                  mt="md"
+                  radius="md"
+                  onClick={handleRegister}
+                  loading={isFetching}
+                >
+                  Register Now
+                </Button>
+              ) : (
+                <>
+                  <Button fullWidth mt="md" radius="md" color="gray" disabled>
+                    Registered
+                  </Button>
+                  <Button
+                    fullWidth
+                    mt="xs"
+                    radius="md"
+                    color="green"
+                    onClick={handleFinish}
+                    loading={isFetching}
+                    disabled={isFinished}
+                  >
+                    Finish Competition
+                  </Button>
+                </>
+              )}
+            </>
           )}
         </Stack>
       ) : (

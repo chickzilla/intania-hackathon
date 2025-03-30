@@ -1,17 +1,17 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export default async function addPoint(point: number, token: string, rankingPoint: number) {
+export default async function register(contestId: string, newStatus: string, token: string) {
 
     console.log("in func ", token);
-    const response = await fetch(`${API_URL}/user/add-point`, {
+    const response = await fetch(`${API_URL}/contest/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
         },
         // credentials: "include",
         body: JSON.stringify({
-            point: point,
-            ranking_point: rankingPoint,
+            contest_id : contestId,
+            new_status : newStatus
         }),
     });
     if (!response.ok) {
